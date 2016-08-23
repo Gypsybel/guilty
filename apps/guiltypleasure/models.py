@@ -26,7 +26,7 @@ class UserManager(models.Manager):
             errors.append('Alias should be at least one character')
         if not len(form_data['email']) > 0:
             errors.append('Email is required')
-        elif not VALID_EMAIL.match(form_data['email']):
+        elif not EMAIL_REGEX.match(form_data['email']):
             errors.append('Please enter a valid email')
         if len(form_data['password']) < 8:
             errors.append('Password must be at least 8 characters')
@@ -39,9 +39,8 @@ class UserManager(models.Manager):
             if len(check_email) > 0:
                 return (['Email already taken!'], None)
             hashed_password = bcrypt.hashpw(form_data['password'].encode(), bcrypt.gensalt())
-            user = User.objects.create(name=form_data['name'], alias=form_data['alias'],
-                                        email=form_data['email'].lower(),
-                                        password=hashed_password)
+            user = User.objects.create(first_name=form_data['first_name'], last_name=form_data['last_name'],
+                                        email=form_data['email'].lower(), password=hashed_password)
             if not user:
                 return (['Something went wrong'], None)
             return (None, user)
@@ -51,8 +50,8 @@ class User(models.Model):
     last_name = models.CharField(max_length=30)
     email = models.CharField(max_length=40)
     password = models.CharField(max_length=200)
-    address_id = models.OneToOneField('Address')
-    billing_id = models.OneToOneField('Billing')
+    address_id = models.OneToOneField('Address', related_name = 'Address', null = True)
+    billing_id = models.OneToOneField('Billing', related_name = 'Billing', null = True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

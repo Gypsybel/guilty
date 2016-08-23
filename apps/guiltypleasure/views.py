@@ -1,16 +1,46 @@
 from django.shortcuts import render, redirect
 from .models import User, Product, Address, Billing, Category, Image, Order, Review, Comment
+from django.contrib import messages
 
 def index(request):
+    if not 'current_user' in request.session:
+        request.session['guest'] = 'guest'
     # Category default will be show all products
     return render (request, 'guiltypleasure/index.html')
 
+def log_reg(request):
+    return render(request, 'guiltypleasure/customer_login.html')
+
 def customer_login(request):
-        pass    
+    if request.method == "POST":
+        errors, user = User.objects.login(request.POST)
+        if errors:
+            for error in errors:
+                messages.error(request, error)
+        else:
+            messages.success(request, "hey there")
+            del request.session['guest']
+            request.session['current_user'] = user.id
+    return redirect('/')
+
+def register(request):
+    if request.method == "POST":
+        errors, user = User.objects.register(request.POST)
+        if errors:
+            for error in errors:
+                messages.error(request, error)
+        else:
+            messages.success(request, "Congrats you did it!")
+    return redirect('/log_reg')
+
+def customer_logout(request):
+    messages.warning(request, 'you logged out bro')
+    del request.session['current_user']
+    return redirect('/')
 
 def category(request, id):
-    # take in category ID and filter by products with the category ID	
-    	pass  
+    # take in category ID and filter by products with the category ID
+    	pass
 
 def show_product(request, id):
     # take you to product page with discription
@@ -21,11 +51,11 @@ def review(request, id):
    	pass
 
 def comment(request, id):
-    pass    	    
+    pass
 
 def buy(request, id):
     # TOAST a message " Item added to the cart" and then fade out the message after a few seconds
-    return render(request, 'guiltypleasure/show.html')   
+    return render(request, 'guiltypleasure/show.html')
 
 # Buy button should update the quantity field in the Cart view
 
@@ -36,12 +66,12 @@ def cart(request):
     return render(request, 'guiltypleasure/carts.html')
 
 def update(request):
-    pass    
+    pass
 
 def pay(request, id):
 	# Credit card api and
 	pass
-  
+
 
 # def page(request):
 # 	# Still to figure out!
@@ -77,4 +107,4 @@ def addnew(request):
 
 def edit(request, id):
     # edit the product -> gives you the pop up page
-    pass    
+    pass
