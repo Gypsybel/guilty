@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Guilty Pleasure</title>
+    <!-- {% load static %} -->
+    <!-- <link rel="stylesheet" type="text/css" href="{% static 'guiltypleasure/css/style.css' %}" media="screen" title="no title" charset="utf-8"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <style media="screen">
+      body{
+        background-color: #B2DFDB;
+      }
+      .container{
+        border: 1px solid black;
+        height: 650px;
+        background-color: #4DB6AC ;
+        margin: auto;
+      }
+
+      .right-nav{
+        border: 1px solid black;
+        height: 400px;
+        width: 200px;
+        margin: 20px;
+        display: inline-block;
+        vertical-align: top;
+        background-color: white;
+      }
+
+      .products{
+        display: inline-block;
+        border: 1px solid black;
+        height: 500px;
+        width: 570px;
+        margin: 20px 20px 20px 0px;
+        background-color: white;
+      }
+
+      .category{
+        padding: 0px 20px 20px 20px;
+      }
+
+      a:hover{
+        color: darkblue;
+      }
+
+      .prod-header{
+        height: 50px;
+        width: 570px;
+        display: inline-block;
+
+
+      }
+
+      .display-products{
+        border: 1px solid black;
+        width: 150px;
+        height: 150px;
+        display: inline-block;
+        margin: 30px 15px 15px 15px;
+      }
+      .prod-page-link{
+        display: inline-block;
+        margin-left: 300px;
+      }
+
+      .prod-page-link li{
+        display: inline-block;
+      }
+
+      .prod-category{
+        display: inline-block;
+        margin-left: 50px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container" id="wrapper">
+      <nav>
+        <div class="nav-wrapper teal darken-1">
+          <a href="#" class="brand-logo"><i class="material-icons">radio</i>Guilty Pleasure</a>
+          <ul class="right hide-on-med-and-down">
+            <li><a href="/log_out"><i class="material-icons">cancel</i></a></li>
+            <li><a href="#"><i class="material-icons">shopping_cart</i></a></li>
+          </ul>
+        </div>
+     </nav>
+     <div class="row">
+      	<div class="col s12">
+      		<table>
+      			<th>
+      				<td>Item</td>
+      				<td>Price</td>
+      				<td>Quantity</td>
+      				<td>Total</td>
+      			</th>
+      			<!-- {% for product in cart %}
+      				<tr>
+      					<td>{{product.name}}</td>
+      					<td>{{product.price}}</td>
+      					<td>{{product.quantity}} <a href="/update/{{product.id}}">update</a> <a href="/delete/{{product.id}}">trash icon here</a></td>
+      					<td>${{product.price.count}}</td>
+      				</tr>
+      			{% endfor %} -->
+      		</table>
+      		<div class="right">
+	      		Total: {{product.price.count}}
+	      		<a href="/">Continue Shopping</a>
+      		</div>
+      	</div>
+	</div>
+	<div class="col s5">
+		<h4>Shipping Information</h4>
+		<form action="/order" method="POST">
+			First Name: <input type="text" name="first_name">
+			Last Name: <input type="text" name="last_name">
+			Address: <input type="text" name="address_line1">
+			Address 2: <input type="text" name="address_line2">
+			City: <input type="text" name="city">
+			State: <input type="text" name="state">
+			Zipcode: <input type="text" name="zipcode">
+
+		<h4>Billing Information</h4>
+		<button>Same as Shipping</button>
+			First Name: <input type="text" name="billing_first_name">
+			Last Name: <input type="text" name="billing_last_name">
+			Address: <input type="text" name="billing_address_line1">
+			Address 2: <input type="text" name="billing_address_line2">
+			City: <input type="text" name="billing_city">
+			State: <input type="text" name="billing_state">
+			Zipcode: <input type="text" name="billing_zipcode">
+
+			Card: <input type="int" name="card">
+			Security Code: <input type="int" name="security_code">
+			Expiration: <input type="date" name="expiration">
+			<button class="right">Pay</button>
+			{% csrf_token %}
+		</form>
+	</div>
+    </div>
+  </body>
+</html>
