@@ -40,15 +40,15 @@
 <!--   	<p>{{product.description}}</p>
 -->  	<p>Description Goes Here</p>
 		<div class="align right">
-			<form>
-				<select>
+			<form id="post-form">
+				<select id="quantity" class="browser-default">
 					<option value="" disabled selected>Choose your option</option>
 					<option value="1">1 (price)</option>
 					<option value="2">2 (price)</option>
 					<option value="3">3 (price)</option>
 				</select>
 				<label>Quantity</label>
-				<a class="btn" onclick="Materialize.toast('Item Added to Cart', 2000)">Buy!</a>
+				<input type="submit" name="BUY!" class="btn" onclick="Materialize.toast('Item Added to Cart',2000)">
 			</form>
 		</div>
 		</div>
@@ -64,5 +64,20 @@
 		</div>
 	</div>
 </div>
+
+<script type="text/javascript">// Submit post on submit
+	$('#post-form').on('submit', function(event){
+	    event.preventDefault();
+	    console.log("form submitted!")  // sanity check
+	    create_post();
+	});
+</script>
+<script type="text/javascript">
+	// AJAX for posting
+	function create_post() {
+	    console.log("create post is working!") // sanity check
+	    console.log($('#quantity').val())
+	};
+</script>
 </body>
 </html>
