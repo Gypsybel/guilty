@@ -41,7 +41,7 @@ class UserManager(models.Manager):
             hashed_password = bcrypt.hashpw(form_data['password'].encode(), bcrypt.gensalt())
             user = User.objects.create(name=form_data['name'], alias=form_data['alias'],
                                         email=form_data['email'].lower(),
-                                        password=hashed_password
+                                        password=hashed_password)
             if not user:
                 return (['Something went wrong'], None)
             return (None, user)
@@ -77,12 +77,12 @@ class Product(models.Model):
     name = models.CharField(max_length=30)
     description = models.TextField(max_length=1000)
     price = models.IntegerField()
-    category_id = models.ForeignKey(Category)
-    image_id = models.ForeignKey(Image)
+    category_id = models.ForeignKey('Category')
+    image_id = models.ForeignKey('Image')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-    objects = ProductManager()
+    # objects = ProductManager() does not exist yet
 
 class Category(models.Model):
     category = models.CharField(max_length=30)
@@ -90,7 +90,7 @@ class Category(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
 class Image(models.Model):
-    image = models.ImageField()
+    # image = models.ImageField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -100,7 +100,7 @@ class Order(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-    objects = OrderManager()
+    # objects = OrderManager() does not exist yet
 
 class Comment(models.Model):
     comment = models.TextField(max_length=250)
