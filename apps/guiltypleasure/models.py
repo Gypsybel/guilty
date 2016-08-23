@@ -21,9 +21,9 @@ class UserManager(models.Manager):
     def register(self, form_data):
         errors = []
         if len(form_data['first_name']) < 1:
-            errors.append('Name should be at least one character')
+            errors.append('First name should be at least one character')
         if len(form_data['last_name']) < 1:
-            errors.append('Alias should be at least one character')
+            errors.append('Last name should be at least one character')
         if not len(form_data['email']) > 0:
             errors.append('Email is required')
         elif not EMAIL_REGEX.match(form_data['email']):

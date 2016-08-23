@@ -25,6 +25,13 @@
     </style>
   </head>
   <body>
+    {% if messages %}
+      <ul class="messages">
+          {% for message in messages %}
+          <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+          {% endfor %}
+      </ul>
+      {% endif %}
     <div class="container">
       <nav>
         <div class="nav-wrapper teal darken-1">
@@ -54,7 +61,7 @@
   <div class="col s4" id="login">
     <fieldset>
     <legend><h4>Login</h4></legend>
-    <form action="/register" method="POST">
+    <form action="/customer_login" method="POST">
       Email: <input type="text" name="email">
       Password: <input type="password" name="password">
       <button class="btn waves-effect waves-light" type="submit" name="action">Login

@@ -63,6 +63,8 @@ def cart(request):
     # take in session User id to view current products in the CART!!!
     # IF guest they need to fill in the table.
     # IF logged in user info populates on tables.
+    if request.session['current_user']:
+
     return render(request, 'guiltypleasure/carts.html')
 
 def update(request):
