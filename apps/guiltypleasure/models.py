@@ -51,13 +51,14 @@ class User(models.Model):
     last_name = models.CharField(max_length=30)
     email = models.CharField(max_length=40)
     password = models.CharField(max_length=200)
+    address_id = models.OneToOneField(User)
+    billing_id = models.OneToOneField(Billing)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     objects = UserManager()
 
 class Address(models.Model):
-    address_type = models.CharField(max_length=20)
     address_line1 = models.CharField(max_length=100)
     address_line2 = models.CharField(max_length=100)
     city = models.CharField(max_length=50)
@@ -67,6 +68,12 @@ class Address(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
 class Billing(models.Model):
+    billing_address_line1 = models.CharField(max_length=100)
+    billing_address_line2 = models.CharField(max_length=100)
+    billing_city = models.CharField(max_length=50)
+    billing_state = models.CharField(max_length=40)
+    billing_zipcode = models.CharField(max_length=10)
+    user_id = models.OneToOneField(User)
     card = models.CharField(max_length=40)
     security_code = models.CharField(max_length=5)
     expiration = models.DateField(auto_now=False)
@@ -79,6 +86,8 @@ class Product(models.Model):
     price = models.IntegerField()
     category_id = models.ForeignKey('Category')
     image_id = models.ForeignKey('Image')
+    inventory = models.IntegerField()
+    sold = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -90,13 +99,14 @@ class Category(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
 class Image(models.Model):
-    # image = models.ImageField()
+    image = models.ImageField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
 class Order(models.Model):
     status = models.CharField(max_length=40)
-    user_name = models.ForeignKey(User)
+    user_id = models.ForeignKey(User)
+    product_id = models.ForeignKey(Product)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -104,13 +114,15 @@ class Order(models.Model):
 
 class Comment(models.Model):
     comment = models.TextField(max_length=250)
+    review_id = models.ForeignKey(Review)
     user_id = models.ForeignKey(User)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
 class Review(models.Model):
     review = models.TextField(max_length=400)
+    rating = models.IntegerField()
+    product_id = models.ForeignKey(Product)
     user_id = models.ForeignKey(User)
-    comment_id = models.ForeignKey(Comment)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
