@@ -114,7 +114,7 @@ class Order(models.Model):
 
 class Comment(models.Model):
     comment = models.TextField(max_length=250)
-    review_id = models.ForeignKey(Review)
+    review_id = models.ForeignKey('Review')
     user_id = models.ForeignKey(User)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
