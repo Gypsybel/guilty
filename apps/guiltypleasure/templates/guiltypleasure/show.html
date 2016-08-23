@@ -31,7 +31,8 @@
 		<div class="col s5">
 		<h4>Product Name</h4>
 			<img class="materialboxed" width="650" src="temp">
-			<img src="temp">
+			{% load static %}
+			<img src="{% static "guilty/rubiks.jpg" %}" alt="Rubiks Cube"/>
 			<img src="temp">
 			<img src="temp">
 			<img src="temp">
@@ -39,15 +40,14 @@
 		<div class="col s5">
 <!--   	<p>{{product.description}}</p>
 -->  	<p>Description Goes Here</p>
-		<div class="align right">
+		<div class="input-field col s5">
 			<form id="post-form">
 				<select id="quantity" class="browser-default">
-					<option value="" disabled selected>Choose your option</option>
+					<option value="" disabled selected>Quantity</option>
 					<option value="1">1 (price)</option>
 					<option value="2">2 (price)</option>
 					<option value="3">3 (price)</option>
 				</select>
-				<label>Quantity</label>
 				<input type="submit" name="BUY!" class="btn" onclick="Materialize.toast('Item Added to Cart',2000)">
 			</form>
 		</div>
@@ -77,6 +77,11 @@
 	function create_post() {
 	    console.log("create post is working!") // sanity check
 	    console.log($('#quantity').val())
+	    $.ajax({
+	        url : "create_post/", // the endpoint
+	        type : "POST", // http method
+	        data : { the_post : $('#post-text').val() }, // data sent with the post request
+	    });
 	};
 </script>
 </body>
