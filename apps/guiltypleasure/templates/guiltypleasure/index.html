@@ -7,13 +7,17 @@
     <!-- <link rel="stylesheet" type="text/css" href="{% static 'guiltypleasure/css/style.css' %}" media="screen" title="no title" charset="utf-8"> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <style media="screen">
+      body{
+        background-color: #B2DFDB;
+      }
       .container{
         border: 1px solid black;
         height: 650px;
+        background-color: #4DB6AC ;
+        margin: auto;
       }
 
       .right-nav{
@@ -23,6 +27,7 @@
         margin: 20px;
         display: inline-block;
         vertical-align: top;
+        background-color: white;
       }
 
       .products{
@@ -31,19 +36,69 @@
         height: 500px;
         width: 570px;
         margin: 20px 20px 20px 0px;
+        background-color: white;
       }
 
       .category{
-        padding: 20px;
+        padding: 0px 20px 20px 20px;
       }
+      a{
+        color: black;
+      }
+      a:hover{
+        color: darkblue;
+      }
+
+      .prod-header{
+        height: 50px;
+        width: 570px;
+        display: inline-block;
+
+
+      }
+
+      .display-products{
+        border: 1px solid black;
+        width: 150px;
+        height: 150px;
+        display: inline-block;
+        margin: 30px 15px 15px 15px;
+      }
+      .prod-page-link{
+        display: inline-block;
+        margin-left: 300px;
+      }
+
+      .prod-page-link li{
+        display: inline-block;
+      }
+
+      .prod-category{
+        display: inline-block;
+        margin-left: 50px;
+      }
+
+      .pages-link-bottom-nav{
+        width: 570px;
+        height: 50px;
+        margin-top: 200px;
+      }
+      .pages-link-bottom-nav a{
+        margin-left: 10px;
+      }
+      .page-link{
+        margin-left: 190px;
+      }
+
     </style>
   </head>
   <body>
     <div class="container" id="wrapper">
       <nav>
-        <div class="nav-wrapper blue">
-          <a href="#" class="brand-logo"><i class="material-icons">cloud</i>Guilty Pleasure</a>
+        <div class="nav-wrapper teal darken-1">
+          <a href="#" class="brand-logo"><i class="material-icons">radio</i>Guilty Pleasure</a>
           <ul class="right hide-on-med-and-down">
+            <li><a href="/log_out"><i class="material-icons">cancel</i></a></li>
             <li><a href="#"><i class="material-icons">shopping_cart</i></a></li>
           </ul>
         </div>
@@ -52,15 +107,44 @@
         <div class="category">
           <h5>Categories</h5>
           <ul>
-            <li>Music</li>
-            <li>Movies</li>
-            <li>Snacks</li>
-            <li>Random</li>
-            <li>Show All</li>
+            <li><a href="#">Music</a></li>
+            <li><a href="#">Movies</a></li>
+            <li><a href="#">Snacks</a></li>
+            <li><a href="#">Random</a></li>
+            <li><a href="#">Show All</a></li>
           </ul>
         </div>
       </div>
       <div class="products">
+        <div class="prod-header">
+          <div class="prod-category">
+            <h5>Music</h5>
+          </div>
+            <div class="prod-page-link">
+              <ul>
+                <li><a href="#">first</a>|</li>
+                <li><a href="#">prev</a>|</li>
+                <li>2|</li>
+                <li><a href="#">next</a>|</li>
+              </ul>
+            </div>
+        </div>
+        <div class="display-products">
+        </div>
+        <div class="display-products">
+        </div>
+        <div class="display-products">
+        </div>
+        <div class="pages-link-bottom-nav">
+          <div class="page-link">
+            <a href="#">1</a> |
+            <a href="#">2</a> |
+            <a href="#">3</a> |
+            <a href="#">4</a> |
+            <a href="#">5</a> |
+            <a href="#">></a> |
+        </div>
+        </div>
       </div>
 
 
