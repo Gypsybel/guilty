@@ -2,8 +2,67 @@
 <html>
 <head>
 	<title>Show Product</title>
+
+  <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
+
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+	<!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
+
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script> 
+          
 </head>
 <body>
-
+<div class="container">
+	<nav>
+    <div class="nav-wrapper blue">
+      <a href="#" class="brand-logo"><i class="material-icons">cloud</i>Guilty Pleasure</a>
+      <ul class="right hide-on-med-and-down">
+        <li><a href="#"><i class="material-icons">search</i></a></li>
+        <li><a href="#"><i class="material-icons">shopping_cart</i></a></li>
+      </ul>
+    </div>
+  </nav>
+	<a href="/">Go Back</a>
+	<div class="row">
+		<div class="col s5">
+		<h4>Product Name</h4>
+			<img class="materialboxed" width="650" src="temp">
+			<img src="temp">
+			<img src="temp">
+			<img src="temp">
+			<img src="temp">
+		</div>
+		<div class="col s5">
+<!--   	<p>{{product.description}}</p>
+-->  	<p>Description Goes Here</p>
+		<div class="align right">
+			<form>
+				<select>
+					<option value="" disabled selected>Choose your option</option>
+					<option value="1">1 (price)</option>
+					<option value="2">2 (price)</option>
+					<option value="3">3 (price)</option>
+				</select>
+				<label>Quantity</label>
+				<button>Buy</button>
+			</form>
+		</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col s12">
+		<h5>Similar Items</h5>
+		<!-- {% for product in similarproducts %}
+			<img src="{{product.source}}">
+      {{product.price}}
+      {{product.name}}
+		{% endfor %} -->
+		</div>
+	</div>
+</div>
 </body>
 </html>
