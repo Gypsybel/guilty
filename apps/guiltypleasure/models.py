@@ -51,8 +51,8 @@ class User(models.Model):
     last_name = models.CharField(max_length=30)
     email = models.CharField(max_length=40)
     password = models.CharField(max_length=200)
-    address_id = models.OneToOneField(User)
-    billing_id = models.OneToOneField(Billing)
+    address_id = models.OneToOneField('Address')
+    billing_id = models.OneToOneField('Billing')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
