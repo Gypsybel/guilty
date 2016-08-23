@@ -5,6 +5,9 @@ def index(request):
     # Category default will be show all products
     return render (request, 'guiltypleasure/index.html')
 
+def customer_login(request):
+        pass    
+
 def category(request, id):
     # take in category ID and filter by products with the category ID	
     	pass  
@@ -26,11 +29,11 @@ def buy(request, id):
 
 # Buy button should update the quantity field in the Cart view
 
-def cart(request, id):
+def cart(request):
     # take in session User id to view current products in the CART!!!
     # IF guest they need to fill in the table.
     # IF logged in user info populates on tables.
-    pass
+    return render(request, 'guiltypleasure/carts.html')
 
 def update(request):
     pass    

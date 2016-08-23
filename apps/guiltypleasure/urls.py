@@ -3,12 +3,13 @@ from . import views
 
 urlpatterns = [
     url(r'^$', views.index),
+    
     url(r'^category/(?P<id>\d+)$', views.category),
     url(r'^show_product/(?P<id>\d+)$', views.show_product),
     url(r'^review/(?P<id>\d+)$', views.review),
     url(r'^comment/(?P<id>\d+)$', views.comment),
     url(r'^buy/(?P<id>\d+)$', views.buy),
-    url(r'^cart/(?P<id>\d+)$', views.cart),
+    url(r'^cart$', views.cart),
     url(r'^update$', views.update),
     url(r'^pay$', views.pay),
     url(r'^admin_index$', views.admin_index),
