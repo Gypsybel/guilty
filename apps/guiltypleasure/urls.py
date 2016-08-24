@@ -17,7 +17,6 @@ urlpatterns = [
     url(r'^admin_index$', views.admin_index),
     url(r'^admin_log$', views.admin_log),
     url(r'^orders$', views.orders),
-    url(r'^show_order/(?P<id>\d+)$', views.show_order),
     url(r'^products$', views.products),
     url(r'^addnew$', views.addnew),
     url(r'^show_order/(?P<id>\d+)$', views.show_order),

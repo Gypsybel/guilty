@@ -82,14 +82,22 @@ def pay(request, id):
 		# ADMIN STUFF
 
 def admin_index(request):
-    # return render(request, 'guiltypleasure/admindashboard.html')
+    return render(request, 'guiltypleasure/adminlogin.html')
     pass
 
 def admin_log(request):
-    # Log in verification here
-    pass
-    # return redirect ('/orders')
-
+    if request.method =="POST":
+        errors, admin = User.objects.admin_log(request.POST)
+        if errors:
+            for error in errors:
+                messages.error(request, errors)
+                return redirect('/admin_index')
+        else:
+            request.session['admin'] = user.id
+            return redirect('/orders')
+    else:
+        return redirect('/')
+        
 def orders(request):
 	# This should be able to pull in all the informaiton throught the User ID link
     # return render(request, 'guiltypleasure/orders.html')

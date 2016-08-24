@@ -45,6 +45,17 @@ class UserManager(models.Manager):
                 return (['Something went wrong'], None)
             return (None, user)
 
+    def admin_log(self, form_data):
+        errors = []
+        if len(form_data['email']) > 0 and len(form_data['password']) > 7:
+            check_email = User.objects.filter(email='admin@admin.com'.lower())
+            if len(check_email) > 0:
+                user = check_email[0]
+                if bcrypt.hashpw(form_data['password'].encode(), user.password.encode()) == user.password:
+                    return (None, user)
+        errors.append('Invalid login credentials.')
+        return (errors, None)
+
 class User(models.Model):
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)

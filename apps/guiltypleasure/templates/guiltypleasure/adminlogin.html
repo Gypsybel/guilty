@@ -14,16 +14,17 @@
   </head>
   <body>
     <div class="admin-login">
-    <form action="/admin" method="post">
-    <fieldset>
+      <fieldset>
       <legend>Admin Login</legend>
-    Email: <input type="text" name="email">
-    Password: <input type="text" name="password">
-      <button class="btn waves-effect waves-light" type="submit" name="action">Login
-      <i class="material-icons right"></i>
-      </button>
+        <form action="/admin" method="post">
+        {% csrf_token %}
+        Email: <input type="text" name="email">
+        Password: <input type="text" name="password">
+          <button class="btn waves-effect waves-light" type="submit" name="action">Login
+          <i class="material-icons right"></i>
+          </button>
+        </form>
     </fieldset>
-  </form>
   </div>
 
   </body>
