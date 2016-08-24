@@ -10,14 +10,14 @@
     <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-    <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <style media="screen">
       body{
         background-color: #B2DFDB;
       }
       .container{
         border: 1px solid black;
-        height: 4000px;
+        height: 2000px;
         background-color: #4DB6AC ;
         margin: auto;
       }
@@ -116,6 +116,19 @@
 	</div>
 	<div class="col s5">
 		<h4>Shipping Information</h4>
+    <script type="text/javascript">
+    function FillBilling(f) {
+      if(f.billingtoo.checked == true) {
+        f.billing_first_name.value = f.first_name.value;
+        f.billing_last_name.value = f.last_name.value;
+        f.billing_address_line1.value = f.address_line1.value;
+        f.billing_address_line2.value = f.address_line2.value;
+        f.billing_city.value = f.city.value;
+        f.billing_state.value = f.state.value;
+        f.billing_zipcode.value = f.zipcode.value;
+      }
+    };
+    </script>
 		<form action="/order" method="POST">
 			First Name: <input type="text" name="first_name">
 			Last Name: <input type="text" name="last_name">
@@ -126,7 +139,10 @@
 			Zipcode: <input type="text" name="zipcode">
 
 		<h4>Billing Information</h4>
-		<button>Same as Shipping</button>
+		  <p>
+      <input class='browser-default' type="checkbox" name="billingtoo" onclick="FillBilling(this.form)" id="test5" />
+      <label for="test5">Same as Shipping</label>
+      </p>
 			First Name: <input type="text" name="billing_first_name">
 			Last Name: <input type="text" name="billing_last_name">
 			Address: <input type="text" name="billing_address_line1">
@@ -134,22 +150,22 @@
 			City: <input type="text" name="billing_city">
 			State: <input type="text" name="billing_state">
 			Zipcode: <input type="text" name="billing_zipcode">
-
 			{% csrf_token %}
 		</form>
-	   </div>
-     <form action="/pay" method="POST">
-      <script
-        src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-        data-key="pk_test_aOlFAI0mfZ6MvsfQvHsYTiGX"
-        data-amount="{{ amount }}"
-        data-name="Guilty Pleasure"
-        data-description="Widget"
-        data-image="/img/documentation/checkout/marketplace.png"
-        data-locale="auto"
-        data-zip-code="true">
-      </script>
-    </form>
-  </div>
+	</div>
+  <form action="/pay" method="POST">
+   <script
+     src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+     data-key="pk_test_aOlFAI0mfZ6MvsfQvHsYTiGX"
+     data-amount="{{ amount }}"
+     data-name="Guilty Pleasure"
+     data-description="Widget"
+     data-image="/img/documentation/checkout/marketplace.png"
+     data-locale="auto"
+     data-zip-code="true">
+   </script>
+ </form>
+    </div>
   </body>
+
 </html>
