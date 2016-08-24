@@ -1,5 +1,73 @@
-#wrapper{
-  border: 1px solid black;
-  height: 1000px;
+body{
+  background-image:url("../images/beatles_background.jpg");
+  background-repeat:no-repeat;
+  background-size: 1920px 1080px;
+  background-attachment: fixed;
+}
+
+nav{
+   height:120px;
+}
+#category-search{
+  display: inline-block;
+  width: 200px;
+  margin-left: 500px;
+}
+.prod-page-link{
+  display: inline-block;
+  margin-left: 700px;
+}
+.prod-page-link li{
+  display: inline-block;
+}
+.product-title{
+  display: inline-block;
+}
+a{
+  color: blue;
+}
+a:hover{
+  color: darkblue;
+}
+img{
+   margin: auto;
+}
+  body {
+display: flex;
+min-height: 100vh;
+flex-direction: column;
+}
+
+main {
+flex: 1 0 auto;
+}
+
+.signin{
+  background-color: white;
+  height: 550px;
   width: 1000px;
+  margin:auto;
+}
+#register{
+  width: 400px;
+  height: 300px;
+  display: inline-block;
+
+}
+#login{
+  width: 400px;
+  height: 300px;
+  display: inline-block;
+  vertical-align: top;
+
+}
+
+#shipping{
+  width: 1000px;
+  margin: auto;
+}
+
+#table-cart{
+  width: 1000px;
+  margin: auto;
 }
