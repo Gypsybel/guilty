@@ -75,6 +75,8 @@ class ProductManager(models.Manager):
         Product.objects.create(name= name,description = description,price = 0, category_id = Category.objects.get(id=category.id),inventory = 100, sold = 0,  )
         return(True)
 
+   
+
 class User(models.Model):
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)

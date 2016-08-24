@@ -110,7 +110,8 @@ def show_order(request, id):
     pass
 
 def products(request):
-    return render(request, 'guiltypleasure/adminproducts.html')
+    products = Product.objects.all()
+    return render(request, 'guiltypleasure/adminproducts.html', context={'products':products})
 
 def addnew(request):
     category = Category.objects.all()
@@ -126,9 +127,9 @@ def addproduct(request):
     return redirect('/addnew')
 
 def edit(request, id):
-    # edit the product -> gives you the pop up page
-    # return render(request, 'guiltypleasure/.html')
+    return render(request, 'guiltypleasure/edit_product.html')
     pass
 
 def delete(request, id):
-    pass
+    
+    
