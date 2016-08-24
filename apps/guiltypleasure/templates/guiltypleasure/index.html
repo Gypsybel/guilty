@@ -3,62 +3,21 @@
   <head>
     <meta charset="utf-8">
     <title>Guilty Pleasure</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'guiltypleasure/css/style.css' %}" media="screen" title="no title" charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css">
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
-    <style media="screen">
-      body{
-        background-image:url("beatles_background.jpg");
-        background-repeat:no-repeat;
-        background-size: 1920px 1080px;
-      }
-     
-      nav{
-         height:120px;
-      }
-      #category-search{
-        display: inline-block;
-        width: 200px;
-        margin-left: 500px;
-      }
-      .prod-page-link{
-        display: inline-block;
-        margin-left: 700px;
-      }
-      .prod-page-link li{
-        display: inline-block;
-      }
-      .product-title{
-        display: inline-block;
-      }
-      a{
-        color: blue;
-      }
-      a:hover{
-        color: darkblue;
-      }
-      img{
-         margin: auto;
-      }
-        body {
-    display: flex;
-    min-height: 100vh;
-    flex-direction: column;
-  }
 
-  main {
-    flex: 1 0 auto;
-  }
-    </style>
-</head>
+  </head>
 <body>
    <header>
       <div class="container" id="wrapper">
          <nav>
             <div class="nav-wrapper black">
-               <img src="GuiltyPleasures.jpg" height="100%">
+               <a href="/"><img src="../../static/guiltypleasure/images/GuiltyPleasures.jpg" height="100%"></a>
                <ul class="right hide-on-med-and-down">
                   <ul id="dropdown" class="dropdown-content">
                      <li><a href="#">Movies</a></li>
