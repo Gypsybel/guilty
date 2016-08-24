@@ -13,10 +13,17 @@
     </style>
   </head>
   <body>
+    {% if messages %}
+      <ul class="messages">
+          {% for message in messages %}
+          <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+          {% endfor %}
+      </ul>
+    {% endif %}
     <div class="admin-login">
       <fieldset>
       <legend>Admin Login</legend>
-        <form action="/admin" method="post">
+        <form action="/admin_log" method="post">
         {% csrf_token %}
         Email: <input type="text" name="email">
         Password: <input type="text" name="password">

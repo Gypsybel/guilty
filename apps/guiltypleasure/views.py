@@ -63,7 +63,6 @@ def cart(request):
     # take in session User id to view current products in the CART!!!
     # IF guest they need to fill in the table.
     # IF logged in user info populates on tables.
-    if request.session['current_user']:
 
     return render(request, 'guiltypleasure/carts.html')
 
@@ -83,11 +82,11 @@ def pay(request, id):
 
 def admin_index(request):
     return render(request, 'guiltypleasure/adminlogin.html')
-    pass
+
 
 def admin_log(request):
     if request.method =="POST":
-        errors, admin = User.objects.admin_log(request.POST)
+        errors, user = User.objects.admin_log(request.POST)
         if errors:
             for error in errors:
                 messages.error(request, errors)
@@ -97,11 +96,14 @@ def admin_log(request):
             return redirect('/orders')
     else:
         return redirect('/')
-        
+
+def admin_logout(request):
+    del request.session['admin']
+    return redirect('/admin_index')
 def orders(request):
 	# This should be able to pull in all the informaiton throught the User ID link
-    # return render(request, 'guiltypleasure/orders.html')
-    pass
+    return render(request, 'guiltypleasure/adminorders.html')
+
 
 def show_order(request, id):
     # Queries up the ass
