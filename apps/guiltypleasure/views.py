@@ -113,12 +113,17 @@ def products(request):
     return render(request, 'guiltypleasure/adminproducts.html')
 
 def addnew(request):
-	# return render (request, 'guiltypleasure/addnew.html')
-	pass
+    category = Category.objects.all()
+    return render(request, 'guiltypleasure/add_product.html', context={'category':category})
+
 
 def addproduct(request):
-    # QUERIES to add a new product to the DB
-    pass
+    products = Product.objects.add(request.POST['name'], request.POST['description'], request.POST['select_category'], request.POST['new_cat'])
+    if products == False:
+        messages.warning(request,'Bro you messed up the form')
+    else:
+        messages.success(request,'Successfully added a product, YOU ROCK!')
+    return redirect('/addnew')
 
 def edit(request, id):
     # edit the product -> gives you the pop up page
