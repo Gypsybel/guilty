@@ -56,6 +56,24 @@ class UserManager(models.Manager):
         errors.append('Invalid login credentials.')
         return (errors, None)
 
+class ProductManager(models.Manager):
+    def add(self, name, description, select_category, new_cat):
+        if name == '' or description == '':
+            return (False)
+        if select_category == '':
+            if new_cat == '':
+                return(False)
+            else:
+                check_cat = Category.objects.filter(category = select_category)
+                if len(check_cat) > 0:
+                    return (False)
+                Category.objects.create(category = new_cat)
+                category = Category.objects.get(category = new_cat)
+        else:
+            category = Category.objects.get(id = select_category)
+
+        Product.objects.create(name= name,description = description,price = 0, category_id = Category.objects.get(id=category.id),inventory = 100, sold = 0,  )
+        return(True)
 
 class User(models.Model):
     first_name = models.CharField(max_length=30)
@@ -96,13 +114,11 @@ class Product(models.Model):
     description = models.TextField(max_length=1000)
     price = models.IntegerField()
     category_id = models.ForeignKey('Category')
-    image_id = models.ForeignKey('Image')
     inventory = models.IntegerField()
     sold = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-
-    # objects = ProductManager() does not exist yet
+    objects = ProductManager()
 
 class Category(models.Model):
     category = models.CharField(max_length=30)
@@ -111,6 +127,7 @@ class Category(models.Model):
 
 class Image(models.Model):
     image = models.ImageField()
+    product_id = models.ForeignKey(Product, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
