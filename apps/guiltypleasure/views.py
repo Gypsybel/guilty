@@ -127,9 +127,15 @@ def addproduct(request):
     return redirect('/addnew')
 
 def edit(request, id):
-    return render(request, 'guiltypleasure/edit_product.html')
-    pass
+    product = Product.objects.get(id=id)
+    category = Category.objects.all()
+    context={'product':product, 'category':category}
+    return render(request, 'guiltypleasure/edit_product.html', context)
+
+def editproduct(request, id):
+    product = Product.objects.edit(request.POST['name'], request.POST['description'], request.POST['select_category'], request.POST['new_cat'], id)
+    return redirect('/products')
 
 def delete(request, id):
-    
-    
+    Product.objects.filter(id=id).delete()
+    return redirect('/products')

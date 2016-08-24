@@ -72,9 +72,27 @@ class ProductManager(models.Manager):
         else:
             category = Category.objects.get(id = select_category)
 
-        Product.objects.create(name= name,description = description,price = 0, category_id = Category.objects.get(id=category.id),inventory = 100, sold = 0,  )
+        Product.objects.create(name= name,description = description,price = 0, category_id = Category.objects.get(id=category.id),inventory = 100, sold = 0,)
         return(True)
 
+    def edit(self, name, description, select_category, new_cat, id):
+        if name == '' or description == '':
+            return (False)
+        if select_category == '':
+            if new_cat == '':
+                return(False)
+            else:
+                check_cat = Category.objects.filter(category = select_category)
+                if len(check_cat) > 0:
+                    return (False)
+                Category.objects.create(category = new_cat)
+                category = Category.objects.get(category = new_cat)
+        else:
+            category = Category.objects.get(id = select_category)        
+        Product.objects.filter(id=id).update(name= name)
+        Product.objects.filter(id=id).update(description = description)
+        Product.objects.filter(id=id).update(category_id = Category.objects.get(id=category.id))
+        return(True)
    
 
 class User(models.Model):

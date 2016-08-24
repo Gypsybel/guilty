@@ -1,71 +1,54 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>Admin Orders</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
-    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <style media="screen">
-    body{
-      background-color: #B2DFDB;
-    }
-    .container{
-      border: 1px solid black;
-      height: 4000px;
-      background-color: #4DB6AC ;
-      margin: auto;
-    }
-    .search{
-      border: 1px solid black;
-      width: 850px;
-      height: 60px;
-    }
-    a{
-      color: black;
-    }
-    .order-table{
-      border: 1px solid #B2DFDB;
-    }
-
-    .page-link{
-      margin-left: 350px;
-    }
-    </style>
-  </head>
-  <body>
-    {% if messages %}
-      <ul class="messages">
-          {% for message in messages %}
-          <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-          {% endfor %}
-      </ul>
-    {% endif %}
-    <div class="container" id="wrapper">
-      <nav>
-        <div class="nav-wrapper teal darken-1">
-          <!-- top nav -->
-          <a href="#" class="brand-logo">Admin Add Product</a>
-          <ul id="nav-mobile" class="right hide-on-med-and-down">
-            <li><a href="/orders">Orders</a></li>
-            <li><a href="/products">Products</a></li>
-            <li><a href="/admin_logout"><i class="material-icons">cancel</i></a></li>
-          </ul>
+<head>
+  <meta charset="utf-8">
+  <title>Admin Orders</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
+  <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body class="teal lighten-3">
+  {% if messages %}
+    <ul class="messages">
+      {% for message in messages %}
+      <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+  <div class="container teal lighten-5" id="wrapper">
+    <nav>
+      <div class="nav-wrapper teal darken-1">
+        <!-- top nav -->
+        <a href="#" class="brand-logo">Admin Add Product</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li><a href="/orders">Orders</a></li>
+          <li><a href="/products">Products</a></li>
+          <li><a href="/admin_logout"><i class="material-icons">cancel</i></a></li>
+        </ul>
+      </div>
+    </nav>
+    <form action="/addproduct" method="POST" enctype="multipart/form-data">
+      Name: <input type="text" name="name">
+      Description: <input type="text" name="description">
+      Category: <select class="browser-default" name="select_category">
+        <option></option>
+        {% for entry in category %}
+        <option value="{{entry.id}}">{{entry.category}}</option>
+        {% endfor %}
+      </select>
+      or add new category: <input type="text" name="new_cat">
+      Images:
+      <div class="file-field input-field">
+        <div class="btn">
+          <span>File</span>
+          <input type="file">
         </div>
-      </nav>
-      <form action="/addproduct" method="POST">
-        {% csrf_token %}
-      	Name: <input type="text" name="name">
-      	Description: <input type="text" name="description">
-      	Category: <select class="browser-default" name="select_category">
-              <option></option>
-              {% for entry in category %}
-              <option value="{{entry.id}}">{{entry.category}}</option>
-              {% endfor %}
-            </select>
-      	or add new category: <input type="text" name="new_cat">
-      	Images: <button>Upload</button>
-      	<input type="submit" name="ADD!" class="btn">
-      </form>
-
-  </body>
+        <div class="file-path-wrapper">
+          <input class="file-path validate" type="text">
+        </div>
+        <input type="submit" name="ADD!" class="btn">
+      </div>
+      {% csrf_token %}
+    </form>
+  </div>
+</body>
 </html>
