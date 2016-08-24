@@ -72,17 +72,19 @@
             </tr>
           </thead>
           <tbody>
+            {% for entry in products%}
             <tr>
-              <td>There is no spoon</td>
-              <td>1</td>
-              <td>Michael Jackson - Thriller</td>
-              <td>50</td>
-              <td>48</td>
-              <td><a href="/edit" class="waves-effect waves-light btn"><i class="material-icons left">mode_edit</i></a>
-                  <a href="/delete" class="waves-effect waves-light btn"><i class="material-icons left">delete</i></a>
+              <td>{{entry.name}}</td>
+              <td>{{entry.id}}</td>
+              <td>{{entry.name}}}</td>
+              <td>{{entry.inventory}}</td>
+              <td>{{entry.sold}}</td>
+              <td><a href="/edit/{{entry.id}}" class="waves-effect waves-light btn"><i class="material-icons left">mode_edit</i></a>
+                  <a href="/delete/{{entry.id}}" class="waves-effect waves-light btn"><i class="material-icons left">delete</i></a>
 
               </td>
             </tr>
+            {% endfor %}
           </tbody>
 
         </table>
