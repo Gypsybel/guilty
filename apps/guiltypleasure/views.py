@@ -7,7 +7,7 @@ def index(request):
         request.session['guest'] = 'guest'
     products = Product.objects.all()
     context={'products':products}
-    return render (request, 'guiltypleasure/index.html', products)
+    return render (request, 'guiltypleasure/index.html', context)
 
 def log_reg(request):
     return render(request, 'guiltypleasure/customer_login.html')
