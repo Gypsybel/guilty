@@ -13,7 +13,7 @@
 
   <!-- Compiled and minified JavaScript -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script> 
-          
+  
 </head>
 <body>
 <div class="container">
@@ -28,20 +28,31 @@
   </nav>
 	<a href="/">Go Back</a>
 	<div class="row">
-		<div class="col s5">
-		<h4>Product Name</h4>
-			<img class="materialboxed" width="650" src="temp">
-			{% load static %}
-			<img src="{% static "guilty/rubiks.jpg" %}" alt="Rubiks Cube"/>
-			<img src="temp">
-			<img src="temp">
-			<img src="temp">
+		<div class="col s6">
+			<h4>Product Name</h4>
+
+			  <div class="slider">
+			    <ul class="slides">
+			      <li>
+			        <img class="materialboxed" width="150" src='../../static/guiltypleasure/images/rubiks.jpg' alt="Rubiks Cube"/>
+			        <div class="caption center-align">
+			          <h3 class="black-text">First Image!</h3>
+			        </div>
+			      </li>
+			      <li>
+			        <img class="materialboxed" width="150" src='../../static/guiltypleasure/images/rubiks.jpg' alt="Rubiks Cube"/>
+			        <div class="caption left-align">
+			          <h3 class="black-text">Second Image</h>
+			        </div>
+			      </li>
+			    </ul>
+			  </div>
 		</div>
-		<div class="col s5">
 <!--   	<p>{{product.description}}</p>
--->  	<p>Description Goes Here</p>
+--> 
 		<div class="input-field col s5">
-			<form id="post-form">
+			<p>Description Goes Here</p>
+			<form id="post-form" class="right">
 				<select id="quantity" class="browser-default">
 					<option value="" disabled selected>Quantity</option>
 					<option value="1">1 (price)</option>
@@ -50,7 +61,6 @@
 				</select>
 				<input type="submit" name="BUY!" class="btn" onclick="Materialize.toast('Item Added to Cart',2000)">
 			</form>
-		</div>
 		</div>
 	</div>
 	<div class="row">
@@ -84,5 +94,12 @@
 	    });
 	};
 </script>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+      $('.slider').slider({full_width: true});
+    });
+</script>
+
 </body>
 </html>
