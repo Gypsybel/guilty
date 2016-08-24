@@ -5,8 +5,9 @@ from django.contrib import messages
 def index(request):
     if not 'current_user' in request.session:
         request.session['guest'] = 'guest'
-    # Category default will be show all products
-    return render (request, 'guiltypleasure/index.html')
+    products = Product.objects.all()
+    context={'products':products}
+    return render (request, 'guiltypleasure/index.html', products)
 
 def log_reg(request):
     return render(request, 'guiltypleasure/customer_login.html')
