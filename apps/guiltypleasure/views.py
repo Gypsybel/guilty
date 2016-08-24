@@ -110,13 +110,20 @@ def show_order(request, id):
     pass
 
 def products(request):
-    # return render(request, 'guiltypleasure/products.html')
-    pass
+    return render(request, 'guiltypleasure/adminproducts.html')
 
 def addnew(request):
 	# return render (request, 'guiltypleasure/addnew.html')
 	pass
 
+def addproduct(request):
+    # QUERIES to add a new product to the DB
+    pass
+
 def edit(request, id):
     # edit the product -> gives you the pop up page
+    # return render(request, 'guiltypleasure/.html')
+    pass
+
+def delete(request, id):
     pass

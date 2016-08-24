@@ -20,6 +20,8 @@ urlpatterns = [
     url(r'^orders$', views.orders),
     url(r'^products$', views.products),
     url(r'^addnew$', views.addnew),
+    url(r'^addproduct$', views.addproduct),
     url(r'^show_order/(?P<id>\d+)$', views.show_order),
     url(r'^edit/(?P<id>\d+)$', views.edit),
+    url(r'^delete/(?P<id>\d+)$', views.delete),
 ]
