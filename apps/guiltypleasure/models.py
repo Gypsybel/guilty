@@ -148,7 +148,7 @@ class Category(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
 class Image(models.Model):
-    image = models.ImageField()
+    image = models.ImageField(upload_to='apps/guiltypleasure/static/guiltypleasure/images')
     product_id = models.ForeignKey(Product, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
