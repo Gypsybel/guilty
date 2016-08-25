@@ -4,7 +4,7 @@ from django.contrib import messages
 
 def index(request):
     if not 'current_user' in request.session:
-        request.session['guest'] = 'guest'
+        request.session['guest'] = []
     products = Product.objects.all()
     image = Image.objects.all()
     image_list = []
@@ -27,9 +27,10 @@ def customer_login(request):
                 messages.error(request, error)
         else:
             messages.success(request, "hey there")
-            del request.session['guest']
-            request.session['current_user'] = user.id
-    return redirect('/')
+            if 'guest' in request.session:
+                del request.session['guest']
+            request.session['current_user'] = [user.id]
+    return redirect('/log_reg')
 
 def register(request):
     if request.method == "POST":
@@ -42,13 +43,29 @@ def register(request):
     return redirect('/log_reg')
 
 def customer_logout(request):
-    messages.warning(request, 'you logged out bro')
-    del request.session['current_user']
+    if 'product' in request.session:
+        del request.session['product']
+    if 'quantity' in request.session:
+        del request.session['quantity']
+    if 'current_user' in request.session:
+        messages.warning(request, 'you logged out bro')
+        del request.session['current_user']
     return redirect('/')
 
 def category(request, id):
-    # take in category ID and filter by products with the category ID
-    	pass
+    if not 'current_user' in request.session:
+        request.session['guest'] = 'guest'
+    category = Category.objects.get(id=id)
+    products = Product.objects.filter(category_id = category)
+    image = Image.objects.all()
+    image_list = []
+    for i in image:
+        images_url = str(i.image)
+        test = images_url[20:]
+        image_list.append({'id':i.product_id, 'url':test})
+    category = Category.objects.all()
+    context={'products':products, 'images':image_list, 'categories':category}
+    return render (request, 'guiltypleasure/index.html', context)
 
 def show_product(request, id):
     product = Product.objects.get(id=id)
@@ -64,16 +81,53 @@ def review(request, id):
 def comment(request, id):
     pass
 
-def buy(request, id):
-    # TOAST a message " Item added to the cart" and then fade out the message after a few seconds
-    return redirect('/cart')
+def add_to_cart(request, id):
+    if 'current_user' in request.session:
+        prod_add = Product.objects.get(id=id)
+        if 'product' in request.session:
+            temp = request.session['product']
+            temp.append(prod_add.id)
+            request.session['product'] = temp
+        else:
+            request.session['product'] = [prod_add.id]
+        if 'quantity' in request.session:
+            temp = request.session['quantity']
+            temp.append(request.POST['quantity'])
+            request.session['quantity'] = temp
+        else:
+            request.session['quantity'] = [request.POST['quantity']]
+    elif 'guest' in request.session:
+        prod_add = Product.objects.get(id=id)
+        if 'product' in request.session:
+            temp = request.session['product']
+            temp.append(prod_add.id)
+            request.session['product'] = temp
+        else:
+            request.session['product'] = [prod_add.id]
+        if 'quantity' in request.session:
+            temp = request.session['quantity']
+            temp.append(request.POST['quantity'])
+            request.session['quantity'] = temp
+        else:
+            request.session['quantity'] = [request.POST['quantity']]
+    else:
+        return redirect('/')
+    print request.session['product']
+    print request.session['quantity']
+    return redirect('/show_product/' + id)
 
 # Buy button should update the quantity field in the Cart view
 
 def cart(request):
-    # take in session User id to view current products in the CART!!!
-    # IF guest they need to fill in the table.
-    # IF logged in user info populates on tables.
+    if 'current_user' in session:
+        return (False)
+    product_list = []
+    quantity_list = []
+    if 'product' in session:
+        for i in request.session['product']:
+
+    if 'quantity' in session:
+        for i in request.session['quantity']:
 
     return render(request, 'guiltypleasure/carts.html')
 
@@ -128,17 +182,6 @@ def products(request):
 def addnew(request):
     category = Category.objects.all()
     return render(request, 'guiltypleasure/add_product.html', context={'category':category})
-
-def add_to_cart(request, id):
-    if 'current_user' in session:
-        prod_add = Product.objects.get(id=id)
-        request.session['current_user'].append(prod_add)
-    if 'guest' in session:
-        prod_add = Product.objects.get(id=id)
-        request.session['current_user'].append(prod_add)
-    else:
-        return redirect('/')
-    return redirect('/show_product')
 
 def addproduct(request):
     products = Product.objects.add(request.POST['name'], request.POST['description'], request.POST['select_category'], request.POST['new_cat'],request.POST['price'], request.FILES['file'])

@@ -20,8 +20,8 @@
                <ul class="right hide-on-med-and-down">
                   <ul id="dropdown" class="dropdown-content">
                       <li><a href="/">Show All</a></li>
-                      {% for category in categories %}
-                      <li><a href="{{category.id}}">{{category.category}}</a></li>
+                      {% for i in categories %}
+                      <li><a href="/category/{{i.id}}">{{i.category}}</a></li>
                       {% endfor %}
 
                   </ul>
@@ -41,20 +41,19 @@
                <div class="product-header">
                   <div class="product-title">
                     <p class="flow-text" id="quote">"Be Proud of What You Love"</p>
-                    {% for category in categories %}
-                      {{category.category}}
-                    {% endfor %}
+                    {% if categories%}
+                      {{categories.name}}
+                    {% endif %}
 
                   </div>
                </div>
             </div>
-
          {% for product in products %}
             <div class="col s4">
               <div class="products">
               {% for image in images %}
                 {% if image.id == product %}
-                 <a href="/show_product/{{product.id}}"><img src="{{image.url}}" height="90%"><br>{{product.name}}</a><br>
+                 <a href="/show_product/{{product.id}}"><img src="../../{{image.url}}" height="90%"><br>{{product.name}}</a><br>
                  {{product.price}}
                 {% endif %}
                 {% endfor %}
