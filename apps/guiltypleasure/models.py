@@ -5,6 +5,7 @@ import bcrypt
 import re
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9\.\+_-]+@[a-zA-Z0-9\._-]+\.[a-zA-Z]*$')
 NAME_REGEX = re.compile(r'^[a-zA-Z]+$')
+PRICE_REGEX = re.compile(r'^[0-9]+\.[0-9][0-9]$')
 
 class UserManager(models.Manager):
     def login(self, form_data):
@@ -57,8 +58,12 @@ class UserManager(models.Manager):
         return (errors, None)
 
 class ProductManager(models.Manager):
-    def add(self, name, description, select_category, new_cat, file):
-        if name == '' or description == '':
+    def add(self, name, description, select_category, new_cat,price, file):
+        if name == '':
+            return (False)
+        if description == '':
+            return (False)
+        if not PRICE_REGEX.match(price):
             return (False)
         if select_category == '':
             if new_cat == '':
@@ -73,12 +78,16 @@ class ProductManager(models.Manager):
             category = Category.objects.get(id = select_category)
 
         Product.objects.create(name= name,description = description,price = 0, category_id = Category.objects.get(id=category.id),inventory = 100, sold = 0,)
-        product = Product.objects.get(name= name, description = description, category_id = Category.objects.get(id=category.id))
+        product = Product.objects.get(name= name, description = description,price = price, category_id = Category.objects.get(id=category.id))
         Image.objects.create(image=file, product_id=product)
         return(True)
 
-    def edit(self, name, description, select_category, new_cat, id):
-        if name == '' or description == '':
+    def edit(self, name, description, select_category, new_cat,price, id):
+        if name == '':
+            return (False)
+        if description == '':
+            return (False)
+        if not PRICE_REGEX.match(price):
             return (False)
         if select_category == '':
             if new_cat == '':
@@ -90,12 +99,13 @@ class ProductManager(models.Manager):
                 Category.objects.create(category = new_cat)
                 category = Category.objects.get(category = new_cat)
         else:
-            category = Category.objects.get(id = select_category)        
+            category = Category.objects.get(id = select_category)
         Product.objects.filter(id=id).update(name= name)
         Product.objects.filter(id=id).update(description = description)
+        Product.objects.filter(id=id).update(price = price)
         Product.objects.filter(id=id).update(category_id = Category.objects.get(id=category.id))
         return(True)
-   
+
 
 class User(models.Model):
     first_name = models.CharField(max_length=30)
@@ -134,7 +144,7 @@ class Billing(models.Model):
 class Product(models.Model):
     name = models.CharField(max_length=30)
     description = models.TextField(max_length=1000)
-    price = models.IntegerField()
+    price = models.DecimalField(max_digits = 20, decimal_places = 2)
     category_id = models.ForeignKey('Category')
     inventory = models.IntegerField()
     sold = models.IntegerField()

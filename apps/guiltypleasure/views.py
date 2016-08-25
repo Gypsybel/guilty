@@ -54,9 +54,9 @@ def category(request, id):
     	pass
 
 def show_product(request, id):
-    # take you to product page with discription
-    # query the "show" product ID and filter the similar products by category ID to display
-    return render(request, 'guiltypleasure/show.html')
+    product = Product.objects.get(id=id)
+    context = {"product":product}
+    return render(request, 'guiltypleasure/show.html', context)
 
 def review(request, id):
    	pass
@@ -130,7 +130,7 @@ def addnew(request):
 
 
 def addproduct(request):
-    products = Product.objects.add(request.POST['name'], request.POST['description'], request.POST['select_category'], request.POST['new_cat'], request.FILES['file'])
+    products = Product.objects.add(request.POST['name'], request.POST['description'], request.POST['select_category'], request.POST['new_cat'],request.POST['price'], request.FILES['file'])
     if products == False:
         messages.warning(request,'Bro you messed up the form')
     else:
@@ -144,7 +144,7 @@ def edit(request, id):
     return render(request, 'guiltypleasure/edit_product.html', context)
 
 def editproduct(request, id):
-    product = Product.objects.edit(request.POST['name'], request.POST['description'], request.POST['select_category'], request.POST['new_cat'], id)
+    product = Product.objects.edit(request.POST['name'], request.POST['description'], request.POST['select_category'], request.POST['new_cat'],request.POST['price'], id)
     return redirect('/products')
 
 def delete(request, id):
