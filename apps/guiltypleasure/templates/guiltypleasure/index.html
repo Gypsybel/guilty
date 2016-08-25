@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css">
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
-
   </head>
 <body>
    <header>
@@ -20,10 +19,11 @@
                <a href="/"><img src="../../static/guiltypleasure/images/GuiltyPleasures.jpg" height="100%"></a>
                <ul class="right hide-on-med-and-down">
                   <ul id="dropdown" class="dropdown-content">
-                    <li><a href="#">Show All</a></li>
-                     <li><a href="#">Movies</a></li>
-                     <li><a href="#!">Music</a></li>
-                     <li><a href="#">Food</a></li>
+                      <li><a href="#">Show All</a></li>
+                      <li><a href="#">Movies</a></li>
+                      <li><a href="#">Music</a></li>
+                      <li><a href="#">Food</a></li>
+
                   </ul>
                   <li><a class="btn dropdown-button deep-orange darken-4" href="#" data-activates="dropdown">Categories</a></li>
                   <li><a href="/log_reg"><i class="material-icons">account_circle</i></a></li>
@@ -40,9 +40,8 @@
             <div class="col s12">
                <div class="product-header">
                   <div class="product-title">
-                    {% for product in products %}
-                     <h4 class="pink-text">{{product.category_id.name}}</h4>
-                    {% endfor %}
+                  <!-- category title -->
+
                   </div>
                   <div class="prod-page-link right">
                      <ul>
