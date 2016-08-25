@@ -6,7 +6,8 @@ def index(request):
     if not 'current_user' in request.session:
         request.session['guest'] = 'guest'
     products = Product.objects.all()
-    context={'products':products}
+    image = Image.objects.all()
+    context={'products':products, 'image':image}
     return render (request, 'guiltypleasure/index.html', context)
 
 def log_reg(request):
@@ -120,7 +121,7 @@ def addnew(request):
 
 
 def addproduct(request):
-    products = Product.objects.add(request.POST['name'], request.POST['description'], request.POST['select_category'], request.POST['new_cat'])
+    products = Product.objects.add(request.POST['name'], request.POST['description'], request.POST['select_category'], request.POST['new_cat'], request.FILES['file'])
     if products == False:
         messages.warning(request,'Bro you messed up the form')
     else:
