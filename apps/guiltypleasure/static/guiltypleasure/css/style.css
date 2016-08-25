@@ -71,3 +71,10 @@ flex: 1 0 auto;
   width: 1000px;
   margin: auto;
 }
+
+.products{
+  height: 300px;
+  width: 300px;
+  border: 1px solid black;
+  margin: 10px;
+}
