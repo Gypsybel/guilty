@@ -128,6 +128,9 @@ def addnew(request):
     category = Category.objects.all()
     return render(request, 'guiltypleasure/add_product.html', context={'category':category})
 
+def add_to_cart(request):
+    print ('you made it this far')
+    print request.POST['data']
 
 def addproduct(request):
     products = Product.objects.add(request.POST['name'], request.POST['description'], request.POST['select_category'], request.POST['new_cat'],request.POST['price'], request.FILES['file'])
