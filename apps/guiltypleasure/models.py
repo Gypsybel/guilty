@@ -57,7 +57,7 @@ class UserManager(models.Manager):
         return (errors, None)
 
 class ProductManager(models.Manager):
-    def add(self, name, description, select_category, new_cat):
+    def add(self, name, description, select_category, new_cat, file):
         if name == '' or description == '':
             return (False)
         if select_category == '':
@@ -73,6 +73,8 @@ class ProductManager(models.Manager):
             category = Category.objects.get(id = select_category)
 
         Product.objects.create(name= name,description = description,price = 0, category_id = Category.objects.get(id=category.id),inventory = 100, sold = 0,)
+        product = Product.objects.get(name= name, description = description, category_id = Category.objects.get(id=category.id))
+        Image.objects.create(image=file, product_id=product)
         return(True)
 
     def edit(self, name, description, select_category, new_cat, id):
