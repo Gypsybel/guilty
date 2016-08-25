@@ -43,22 +43,23 @@
 		<div class="col s6">
 			<h4>{{product.name}}</h4>
 
-			  <div class="slider">
-			    <ul class="slides">
+			  <div id="show-image">
+					<img src='../../{{image}}' height="100%"/>
+				</div>
+			    <!-- <ul class="slides">
 			      <li>
-			        <img class="materialboxed" width="150" src='../../static/guiltypleasure/images/rubiks.jpg' alt="Rubiks Cube"/>
+
 			        <div class="caption center-align">
 			          <h3 class="black-text">First Image!</h3>
 			        </div>
 			      </li>
 			      <li>
-			        <img class="materialboxed" width="150" src='../../static/guiltypleasure/images/rubiks.jpg' alt="Rubiks Cube"/>
+			        <img class="materialboxed" width="150" src=''/>
 			        <div class="caption left-align">
 			          <h3 class="black-text">Second Image</h>
 			        </div>
 			      </li>
-			    </ul>
-			  </div>
+			    </ul> -->
 		</div>
 		<div class="input-field col s5">
 			<p>{{product.description}}</p>
@@ -86,6 +87,7 @@
 		</div>
 	</div>
 </div>
+</main>
 
 <script type="text/javascript">// Submit post on submit
 	$('#post-form').on('submit', function(event){
@@ -112,7 +114,7 @@
       $('.slider').slider({full_width: true});
     });
 </script>
-</main>
+
 <footer class="page-footer black">
 	<div class="container black">
 		 <div class="row">
@@ -123,6 +125,5 @@
 		 </div>
 	</div>
 </footer>
-
 </body>
 </html>
