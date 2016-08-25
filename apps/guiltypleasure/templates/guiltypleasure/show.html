@@ -63,7 +63,7 @@
 		</div>
 		<div class="input-field col s5">
 			<p>{{product.description}}</p>
-			<form action='/add_to_cart' method="POST" id="post-form" class="right">
+			<form action='/add_to_cart/{{product.id}}' method="POST" id="post-form" class="right">
 				<select name="quantity" id="quantity" class="browser-default">
 					<option value="" disabled selected>Quantity</option>
 					<option value="1">1 {{product.price|mul:1}}</option>
@@ -90,35 +90,7 @@
 </div>
 </main>
 
-<script type="text/javascript">// Submit post on submit
-	$('#post-form').on('submit', function(event){
-	    event.preventDefault();
-	    console.log("form submitted!")  // sanity check
-	    create_post();
-	});
-</script>
-<script type="text/javascript">
-	// AJAX for posting
-	function create_post() {
-	    console.log("create post is working!") // sanity check
-	    console.log($('#quantity').val())
-	    var csrf_token = '<%= token_value %>';
-	    var v_token = "csrf_token()";
-		$("body").bind("ajaxSend", function(elm, xhr, s){
-			if (s.type == "POST") {
-				xhr.setRequestHeader('X-CSRF-Token', getCSRFTokenValue());
-			}
-		});
-		console.log("starting ajax now")
-	    $.ajax({
-	        url : "/add_to_cart", // the endpoint
-	        type : "POST", // http method
-	        data : {the_post : $('#quantity').val(), _token: v_token }, // data sent with the post request
-	  		/*data : {CSRF: getCSRFTokenValue()},*/
-	    });
-	    console.log("create post finished running")
-	};
-</script>
+
 
 <script type="text/javascript">
 	$(document).ready(function(){
