@@ -3,6 +3,7 @@
 <head>
 	<title>Show Product</title>
 	{% load static %}
+	{% load mathfilters %}
 	<link rel="stylesheet" type="text/css" href="{% static 'guiltypleasure/css/style.css' %}" media="screen" title="no title" charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -61,12 +62,12 @@
 		</div>
 		<div class="input-field col s5">
 			<p>{{product.description}}</p>
-			<form id="post-form" class="right">
-				<select id="quantity" class="browser-default">
+			<form action="/add_to_cart/{{product.id}}" method="POST" id="post-form" class="right">
+				<select name="quantity" id="quantity" class="browser-default">
 					<option value="" disabled selected>Quantity</option>
-					<option value="1">1 {{product.price}}</option>
-					<option value="2">2 </option>
-					<option value="3">3 </option>
+					<option value="1">1 {{product.price|mul:1}}</option>
+					<option value="2">2 {{product.price|mul:2}}</option>
+					<option value="3">3 {{product.price|mul:3}}</option>
 				</select>
 
 				<!-- this submit must connect to the cart page and dashboard -->

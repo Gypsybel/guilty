@@ -11,7 +11,7 @@ urlpatterns = [
     url(r'^show_product/(?P<id>\d+)$', views.show_product),
     url(r'^review/(?P<id>\d+)$', views.review),
     url(r'^comment/(?P<id>\d+)$', views.comment),
-    url(r'^buy/(?P<id>\d+)$', views.buy),
+    url(r'^add_to_cart/(?P<id>\d+)$', views.add_to_cart),
     url(r'^cart$', views.cart),
     url(r'^update$', views.update),
     url(r'^pay$', views.pay),

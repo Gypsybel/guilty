@@ -62,9 +62,16 @@ def review(request, id):
 def comment(request, id):
     pass
 
-def buy(request, id):
-    # TOAST a message " Item added to the cart" and then fade out the message after a few seconds
-    return redirect('/cart')
+def add_to_cart(request, id):
+    if 'current_user' in session:
+        prod_add = Product.objects.get(id=id)
+        request.session['current_user'].append(prod_add)
+    if 'guest' in session:
+        prod_add = Product.objects.get(id=id)
+        request.session['current_user'].append(prod_add)
+    else:
+        return redirect('/')
+    return redirect('/show_product')
 
 # Buy button should update the quantity field in the Cart view
 
