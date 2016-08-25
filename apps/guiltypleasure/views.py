@@ -63,8 +63,9 @@ def category(request, id):
         images_url = str(i.image)
         test = images_url[20:]
         image_list.append({'id':i.product_id, 'url':test})
+    title = category.category
     category = Category.objects.all()
-    context={'products':products, 'images':image_list, 'categories':category}
+    context={'products':products, 'images':image_list, 'categories':category, 'titles':title}
     return render (request, 'guiltypleasure/index.html', context)
 
 def show_product(request, id):
@@ -125,9 +126,10 @@ def cart(request):
     quantity_list = []
     if 'product' in session:
         for i in request.session['product']:
-
+            pass
     if 'quantity' in session:
         for i in request.session['quantity']:
+            pass
 
     return render(request, 'guiltypleasure/carts.html')
 
