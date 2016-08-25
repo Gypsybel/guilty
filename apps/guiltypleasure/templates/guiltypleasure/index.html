@@ -53,11 +53,9 @@
               <div class="products">
               {% for image in images %}
                 {% if image.id == product %}
-                 <img src="{{image.url}}" height="90%">
+                 <a href="/show_product/{{product.id}}"><img src="{{image.url}}" height="90%"><br>{{product.name}}</a>
                 {% endif %}
-              {% endfor %}<br>
-              {{product.name}}
-
+                {% endfor %}
               </div>
             </div>
          {% endfor %}
