@@ -104,13 +104,14 @@ def admin_log(request):
                 return redirect('/admin_index')
         else:
             request.session['admin'] = user.id
-            return redirect('/orders')
+            return redirect('/order_list')
     else:
         return redirect('/')
 
 def admin_logout(request):
     del request.session['admin']
     return redirect('/admin_index')
+
 def order_list(request):
 	# This should be able to pull in all the informaiton throught the User ID link
     return render(request, 'guiltypleasure/adminorders.html')
@@ -128,6 +129,16 @@ def addnew(request):
     category = Category.objects.all()
     return render(request, 'guiltypleasure/add_product.html', context={'category':category})
 
+def add_to_cart(request, id):
+    if 'current_user' in session:
+        prod_add = Product.objects.get(id=id)
+        request.session['current_user'].append(prod_add)
+    if 'guest' in session:
+        prod_add = Product.objects.get(id=id)
+        request.session['current_user'].append(prod_add)
+    else:
+        return redirect('/')
+    return redirect('/show_product')
 
 def addproduct(request):
     products = Product.objects.add(request.POST['name'], request.POST['description'], request.POST['select_category'], request.POST['new_cat'],request.POST['price'], request.FILES['file'])
