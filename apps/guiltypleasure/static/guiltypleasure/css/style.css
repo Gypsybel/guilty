@@ -78,3 +78,9 @@ flex: 1 0 auto;
   border: 1px solid black;
   margin: 10px;
 }
+
+#show-image{
+  width: 300px;
+  height: 300px;
+  border: 1px solid black;
+}
