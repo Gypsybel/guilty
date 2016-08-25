@@ -14,16 +14,16 @@
 <body>
 
    <header>
-      <div class="container" id="wrapper">
+      <div class="container">
          <nav>
             <div class="nav-wrapper black">
                <a href="/"><img src="../../static/guiltypleasure/images/GuiltyPleasures.jpg" height="100%"></a>
                <ul class="right hide-on-med-and-down">
                   <ul id="dropdown" class="dropdown-content">
-                      <li><a href="#">Show All</a></li>
-                      <li><a href="#">Movies</a></li>
-                      <li><a href="#">Music</a></li>
-                      <li><a href="#">Food</a></li>
+                      <li><a href="/">Show All</a></li>
+                      {% for category in categories %}
+                      <li><a href="{{category.id}}">{{category.category}}</a></li>
+                      {% endfor %}
 
                   </ul>
                   <li><a class="btn dropdown-button deep-orange darken-4" href="#" data-activates="dropdown">Categories</a></li>
@@ -42,7 +42,9 @@
                <div class="product-header">
                   <div class="product-title">
                     <p class="flow-text" id="quote">"Be Proud of What You Love"</p>
-                  <!-- category title -->
+                    {% for category in categories %}
+                      {{category.category}}
+                    {% endfor %}
 
                   </div>
                </div>
@@ -53,7 +55,8 @@
               <div class="products">
               {% for image in images %}
                 {% if image.id == product %}
-                 <a href="/show_product/{{product.id}}"><img src="{{image.url}}" height="90%"><br>{{product.name}}</a>
+                 <a href="/show_product/{{product.id}}"><img src="{{image.url}}" height="90%"><br>{{product.name}}</a><br>
+                 {{product.price}}
                 {% endif %}
                 {% endfor %}
               </div>
@@ -62,7 +65,7 @@
          </div>
          <ul class="pagination">
             <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
-            <li class="active"><a href="#!">1</a></li>
+            <li class="active deep-orange darken-4"><a href="#!">1</a></li>
             <li class="waves-effect"><a href="#!">2</a></li>
             <li class="waves-effect"><a href="#!">3</a></li>
             <li class="waves-effect"><a href="#!">4</a></li>

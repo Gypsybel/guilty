@@ -14,18 +14,11 @@
   </head>
   <body>
     <header>
-       <div class="container" id="wrapper">
+       <div class="container">
           <nav>
              <div class="nav-wrapper black">
                 <a href="/"><img src="../../static/guiltypleasure/images/GuiltyPleasures.jpg" height="100%"></a>
                 <ul class="right hide-on-med-and-down">
-                   <ul id="dropdown" class="dropdown-content">
-                     <li><a href="#">Show All</a></li>
-                      <li><a href="#">Movies</a></li>
-                      <li><a href="#!">Music</a></li>
-                      <li><a href="#">Food</a></li>
-                   </ul>
-                   <li><a class="btn dropdown-button deep-orange darken-4" href="#" data-activates="dropdown">Categories</a></li>
                    <li><a href="/log_reg"><i class="material-icons">account_circle</i></a></li>
                    <li><a href="/customer_logout"><i class="material-icons">cancel</i></a></li>
                    <li><a href="/cart"><i class="material-icons">shopping_cart</i></a></li>
@@ -35,7 +28,7 @@
        </div>
     </header>
 <main>
-     <div class="row white" id="table-cart">
+     <div class="container white">
       	<div class="white">
       		<table>
       			<th>
@@ -53,14 +46,14 @@
       				</tr>
       			{% endfor %} -->
       		</table>
-      		<div class="right">
-	      		Total: {{product.price.count}}<br>
+      		<div class="white">
+	      		Total:{{product.price.count}}<br>
 	      		<a class="btn dropdown-button deep-orange darken-4" href="/">Continue Shopping</a>
             <a class="btn dropdown-button deep-orange darken-4" href="#">Place Order</a>
       		</div>
       	</div>
 	    </div>
-	<div class="col s5 white" id="shipping">
+	<div class="container white">
 		<h4>Shipping Information</h4>
     <script type="text/javascript">
     function FillBilling(f) {
