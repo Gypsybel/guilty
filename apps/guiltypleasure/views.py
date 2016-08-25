@@ -11,10 +11,7 @@ def index(request):
     for i in image:
         images_url = str(i.image)
         test = images_url[20:]
-        print ("*"*100)
-        print test
         image_list.append({'id':i.product_id, 'url':test})
-        print image_list
     category = Category.objects.all()
     context={'products':products, 'images':image_list, 'categories':category}
     return render (request, 'guiltypleasure/index.html', context)
@@ -55,6 +52,7 @@ def category(request, id):
 
 def show_product(request, id):
     product = Product.objects.get(id=id)
+    image = Image.objects.get(product_id=product)
     context = {"product":product}
     return render(request, 'guiltypleasure/show.html', context)
 
@@ -66,7 +64,7 @@ def comment(request, id):
 
 def buy(request, id):
     # TOAST a message " Item added to the cart" and then fade out the message after a few seconds
-    return render(request, 'guiltypleasure/show.html')
+    return redirect('/cart')
 
 # Buy button should update the quantity field in the Cart view
 
@@ -111,7 +109,7 @@ def admin_log(request):
 def admin_logout(request):
     del request.session['admin']
     return redirect('/admin_index')
-def orders(request):
+def order_list(request):
 	# This should be able to pull in all the informaiton throught the User ID link
     return render(request, 'guiltypleasure/adminorders.html')
 
