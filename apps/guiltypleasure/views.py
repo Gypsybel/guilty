@@ -53,7 +53,7 @@ def category(request, id):
 def show_product(request, id):
     product = Product.objects.get(id=id)
     image = Image.objects.get(product_id=product)
-    context = {"product":product}
+    context = {"product":product, 'image':image}
     return render(request, 'guiltypleasure/show.html', context)
 
 def review(request, id):
