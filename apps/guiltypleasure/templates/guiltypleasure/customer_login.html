@@ -14,13 +14,6 @@
   </head>
   <body>
     <header>
-    {% if messages %}
-      <ul class="messages">
-          {% for message in messages %}
-          <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-          {% endfor %}
-      </ul>
-      {% endif %}
     <div class="container">
       <nav>
          <div class="nav-wrapper black">
@@ -34,10 +27,16 @@
       </nav>
     </header>
     <main>
-
       <div class="container white" id="signin">
         	<div class="col s4" id="register">
             <fieldset>
+              {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
         		<legend><h4>Register</h4></legend>
         		<form action="/register" method="POST">
         			First Name: <input type="text" name="first_name">
@@ -45,7 +44,7 @@
         			Email: <input type="text" name="email">
         			Password: <input type="password" name="password">
         			Confirm Password: <input type="password" name="passconf">
-              <button class="btn waves-effect waves-light" type="submit" name="action">Register
+              <button class="btn waves-effect waves-light deep-orange darken-4" type="submit" name="action">Register
               <i class="material-icons right"></i>
               </button>
         			{% csrf_token %}
@@ -58,7 +57,7 @@
             <form action="/customer_login" method="POST">
               Email: <input type="text" name="email">
               Password: <input type="password" name="password">
-              <button class="btn waves-effect waves-light" type="submit" name="action">Login
+              <button class="btn waves-effect waves-light deep-orange darken-4" type="submit" name="action">Login
               <i class="material-icons right"></i>
               </button>
               {% csrf_token %}
