@@ -54,8 +54,8 @@
       </nav>
       <form action="/editproduct/{{product.id}}" method="POST">
         {% csrf_token %}
-      	Name: <input type="text" name="name" value="{{product.name}}"> 
-      	Description: <input type="text" name="description" value="{{product.description}}"> 
+      	Name: <input type="text" name="name" value="{{product.name}}">
+      	Description: <input type="text" name="description" value="{{product.description}}">
       	Category: <select class="browser-default" name="select_category">
               <option></option>
               {% for entry in category %}
@@ -63,6 +63,7 @@
               {% endfor %}
             </select>
       	or add new category: <input type="text" name="new_cat">
+        <p>Price: <input type="text" name="price" value="{{product.price}}"><p>
       	Images: <button>Upload</button>
       	<input type="submit" name="ADD!" class="btn">
       </form>
