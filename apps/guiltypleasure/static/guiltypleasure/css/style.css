@@ -13,16 +13,16 @@ nav{
   width: 200px;
   margin-left: 500px;
 }
-.prod-page-link{
-  display: inline-block;
-  margin-left: 700px;
-}
-.prod-page-link li{
-  display: inline-block;
-}
+
 .product-title{
   display: inline-block;
 }
+
+#quote{
+  font-style: italic;
+  margin: auto;
+}
+
 a{
   color: blue;
 }

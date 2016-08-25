@@ -35,8 +35,10 @@
 				</nav>
 		 </div>
 	</header>
-	<a href="/">Go Back</a>
-	<div class="row">
+	<main>
+
+	<div class="row white">
+		<a href="/">Go Back</a>
 		<div class="col s6">
 			<h4>Product Name</h4>
 
@@ -60,14 +62,15 @@
 <!--   	<p>{{product.description}}</p>
 -->
 		<div class="input-field col s5">
-			<p>Description Goes Here</p>
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 			<form id="post-form" class="right">
 				<select id="quantity" class="browser-default">
 					<option value="" disabled selected>Quantity</option>
-					<option value="1">1 (price)</option>
-					<option value="2">2 (price)</option>
-					<option value="3">3 (price)</option>
+					<option value="1">1 {{product.price}}</option>
+					<option value="2">2 {% {{product.price}} * 2 %}</option>
+					<option value="3">3 {% {{product.price}} * 3 %}</option>
 				</select>
+
 				<input type="submit" name="BUY!" class="btn" onclick="Materialize.toast('Item Added to Cart',2000)">
 			</form>
 		</div>
@@ -109,6 +112,17 @@
       $('.slider').slider({full_width: true});
     });
 </script>
+</main>
+<footer class="page-footer black">
+	<div class="container black">
+		 <div class="row">
+				<div class="col l6 s12">
+						<h5 class="white-text">Footer Content</h5>
+						<p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
+				</div>
+		 </div>
+	</div>
+</footer>
 
 </body>
 </html>

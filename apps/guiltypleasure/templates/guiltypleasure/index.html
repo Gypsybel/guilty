@@ -41,16 +41,9 @@
             <div class="col s12">
                <div class="product-header">
                   <div class="product-title">
+                    <p class="flow-text" id="quote">"Be Proud of What You Love"</p>
                   <!-- category title -->
 
-                  </div>
-                  <div class="prod-page-link right">
-                     <ul>
-                        <li><a href="#" class="teal-text">first</a>|</li>
-                        <li><a href="#" class="teal-text">prev</a>|</li>
-                        <li><a href="#" class="teal-text">next</a>|</li>
-                        <li><a href="#" class="teal-text">last</a></li>
-                     </ul>
                   </div>
                </div>
             </div>
@@ -60,9 +53,9 @@
               <div class="products">
               {% for image in images %}
                 {% if image.id == product %}
-                 <img src="{{image.url}}" height="100%">
+                 <img src="{{image.url}}" height="90%">
                 {% endif %}
-              {% endfor %}
+              {% endfor %}<br>
               {{product.name}}
 
               </div>
