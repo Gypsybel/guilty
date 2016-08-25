@@ -7,8 +7,16 @@ def index(request):
         request.session['guest'] = 'guest'
     products = Product.objects.all()
     image = Image.objects.all()
+    image_list = []
+    for i in image:
+        images_url = str(i.image)
+        test = images_url[20:]
+        print ("*"*100)
+        print test
+        image_list.append({'id':i.product_id, 'url':test})
+        print image_list
     category = Category.objects.all()
-    context={'products':products, 'images':image, 'categories':category}
+    context={'products':products, 'images':image_list, 'categories':category}
     return render (request, 'guiltypleasure/index.html', context)
 
 def log_reg(request):

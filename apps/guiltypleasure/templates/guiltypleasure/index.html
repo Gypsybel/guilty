@@ -12,6 +12,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
   </head>
 <body>
+
    <header>
       <div class="container" id="wrapper">
          <nav>
@@ -53,10 +54,16 @@
                   </div>
                </div>
             </div>
+
          {% for product in products %}
             <div class="col s4">
               <div class="products">
-                {{product.name}}
+              {% for image in images %}
+                {% if image.id == product %}
+                 <img src="{{image.url}}" height="100%">
+                {% endif %}
+              {% endfor %}
+              {{product.name}}
 
               </div>
             </div>
