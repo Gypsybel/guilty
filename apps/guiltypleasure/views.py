@@ -127,7 +127,6 @@ def cart(request):
     product_name = []
     product_price =[]
     quantity_list = []
-<<<<<<< HEAD
     total = []
     if 'product' in request.session:
         for i in range(0, len(request.session['product'])):
@@ -157,16 +156,7 @@ def cart(request):
                 'user': user}
 
     return render(request, 'guiltypleasure/carts.html', context)
-=======
-    if 'product' in session:
-        for i in request.session['product']:
-            pass
-    if 'quantity' in session:
-        for i in request.session['quantity']:
-            pass
 
-    return render(request, 'guiltypleasure/carts.html')
->>>>>>> origin/master
 
 def update(request):
     pass
