@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <title>Guilty Pleasure</title>
     {% load static %}
-    {% load mathfilters %} 
+    {% load mathfilters %}
     <link rel="stylesheet" type="text/css" href="{% static 'guiltypleasure/css/style.css' %}" media="screen" title="no title" charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -29,14 +29,10 @@
        </div>
     </header>
 <main>
-
-    
      <div class="container white">
         <div class="white">
           <table>
             <thead>
-            
-              
               <td>Item</td>
               <td>Price</td>
               <td>Quantity</td>
@@ -47,13 +43,11 @@
               {% for entry in all_data %}
                 <tr>
                   <td>{{entry.name}}</td>
-                  <td>{{entry.price}}</td>
+                  <td>${{entry.price}}</td>
                   <td>{{entry.quantity}}</td>
                   <td>${{entry.cost}}</td>
                 </tr>
               {% endfor %}
-                
-              
               </tbody>
           </table>
           <div class="white">
@@ -100,32 +94,23 @@
       Card: <input type="text" name="card">
       Security Code: <input type="text" name="security_code">
       Expiration: <input type="date" name="expiration">
-      <input type="submit" name="submit">
-      <a class="btn waves-effect waves-light deep-orange darken-4" href="/">Continue Shopping</a>
-      <a class="btn waves-effect waves-light deep-orange darken-4" href="/place_order">Place Order</a>
+      <input class="btn waves-effect waves-light deep-orange darken-4" type="submit" name="submit" value="Place Order">
       {% csrf_token %}
-</form>
-      <form action="/pay" method="POST">
-       <script
-         src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-         data-key="pk_test_aOlFAI0mfZ6MvsfQvHsYTiGX"
-         data-amount="{{ amount }}"
-         data-name="Guilty Pleasure"
-         data-description="Widget"
-         data-locale="auto"
-         data-zip-code="true">
-       </script>
-     </form>
-			{% csrf_token %}
-		</form>
+    </form>
 	</div>
 </main>
 <footer class="page-footer black">
   <div class="container black">
      <div class="row">
         <div class="col l6 s12">
-            <h5 class="white-text">Footer Content</h5>
-            <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
+            <h5 class="white-text">Co-Founders</h5>
+            <ul class='white-text'>
+              <li><a href="http://mylittlepony.hasbro.com/en-us">Chris' Fan Club</a></li>
+              <li><a href="https://gyazo.com/04fb2261a67747d07d81daae5d1aa170">Eduardo's Fan Club</a></li>
+              <li><a href="http://www.hoodedutilitarian.com/wp-content/uploads/2015/03/vanilla-ice-9.jpg">Kelvin's Fan Club</a></li>
+              <li><a href="https://i.ytimg.com/vi/nXtIUXXLGPc/maxresdefault.jpg">Lance's Fan Club</a></li>
+              <li><a href="http://67.media.tumblr.com/b6a4c5975d65f946e3bd236f3efc650b/tumblr_no8m2sSZGL1tyqhp5o1_1280.jpg">Kevin's Fan Club</a></li>
+            </ul>
         </div>
      </div>
   </div>

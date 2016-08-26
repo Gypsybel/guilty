@@ -38,7 +38,8 @@
 					<img src='../../{{image}}' height="100%"/>
 			</div>
 			<div class="container white col s6">
-					<p>{{product.description}} Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+					<h3>{{product.description}} </h3>
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
 					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
 					consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
@@ -52,14 +53,14 @@
 							<option value="2">2 {{product.price|mul:2}}</option>
 							<option value="3">3 {{product.price|mul:3}}</option>
 						</select>
-					<input type="submit" name="BUY!" class="btn waves-effect waves-light deep-orange darken-4" onclick="Materialize.toast('Item Added to Cart',2000)">
+					<input type="submit" name="Add to Cart" value='Add To Cart' class="btn waves-effect waves-light deep-orange darken-4" onclick="Materialize.toast('Item Added to Cart',2000)">
 					</form>
 			 </div>
 		 </div>
 
 
 		</div>
-	
+
 		<h5>Similar Items</h5>
 		<div class="row">
 		 	{% for product in similar %}
@@ -77,14 +78,20 @@
 </main>
 
 <footer class="page-footer black">
-	<div class="container black">
-		 <div class="row">
-				<div class="col l6 s12">
-						<h5 class="white-text">Footer Content</h5>
-						<p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
-				</div>
-		 </div>
-	</div>
+  <div class="container black">
+     <div class="row">
+        <div class="col l6 s12">
+            <h5 class="white-text">Co-Founders</h5>
+            <ul class='white-text'>
+              <li><a href="http://mylittlepony.hasbro.com/en-us">Chris' Fan Club</a></li>
+              <li><a href="https://gyazo.com/04fb2261a67747d07d81daae5d1aa170">Eduardo's Fan Club</a></li>
+              <li><a href="http://www.hoodedutilitarian.com/wp-content/uploads/2015/03/vanilla-ice-9.jpg">Kelvin's Fan Club</a></li>
+              <li><a href="https://i.ytimg.com/vi/nXtIUXXLGPc/maxresdefault.jpg">Lance's Fan Club</a></li>
+              <li><a href="http://67.media.tumblr.com/b6a4c5975d65f946e3bd236f3efc650b/tumblr_no8m2sSZGL1tyqhp5o1_1280.jpg">Kevin's Fan Club</a></li>
+            </ul>
+        </div>
+     </div>
+  </div>
 </footer>
 </body>
 </html>
