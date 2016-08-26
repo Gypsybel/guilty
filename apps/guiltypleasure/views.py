@@ -26,8 +26,9 @@ def customer_login(request):
         if errors:
             for error in errors:
                 messages.error(request, error)
+                return redirect('/log_reg')
         else:
-            messages.success(request, "hey there")
+            messages.success(request, "Successfully Logged In!")
             if 'guest' in request.session:
                 del request.session['guest']
             request.session['current_user'] = user.id
@@ -41,7 +42,7 @@ def register(request):
                 messages.error(request, error)
         else:
             messages.success(request, "Congrats you did it!")
-    return redirect('/log_reg')
+    return redirect('/')
 
 def customer_logout(request):
     if 'product' in request.session:
@@ -177,6 +178,8 @@ def place_order(request):
     order = Order.objects.filter(card=request.POST['card']).order_by('-created_at')[0:1]
     # this may only grab the latest order 
     print order
+    messages.success(request, "Thank you for your purchase!")
+    return redirect('/')
 
 
 # once order is created need specific Order ID
@@ -200,7 +203,7 @@ def place_order(request):
 
     for x in range(0, len(product_id)):
         product_object = Product.objects.get(id=product_id[x])
-        Ord_Prod.objects.create(order_id = order,product_id=product_object,quantity=quantity_list[x], price_total=total[x] )
+        Ord_Prod.objects.create(order_id = order[0],product_id=product_object,quantity=quantity_list[x], price_total=total[x] )
 
         # this will make objects in the Ord_Prod table and will need to link to get ID from Order table
     return redirect('/')

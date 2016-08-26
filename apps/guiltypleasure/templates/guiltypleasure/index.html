@@ -40,6 +40,13 @@
                <div class="product-header">
                   <div class="product-title">
                     <p class="flow-text" id="quote">"Be Proud of What You Love"</p>
+                     {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
                     <h4 id="title">{{titles}}</h4>
                   </div>
                </div>
