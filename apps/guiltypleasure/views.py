@@ -31,7 +31,7 @@ def customer_login(request):
             if 'guest' in request.session:
                 del request.session['guest']
             request.session['current_user'] = [user.id]
-    return redirect('/log_reg')
+    return redirect ('/')
 
 def register(request):
     if request.method == "POST":
