@@ -30,7 +30,7 @@ def customer_login(request):
             messages.success(request, "hey there")
             if 'guest' in request.session:
                 del request.session['guest']
-            request.session['current_user'] = [user.id]
+            request.session['current_user'] = user.id
     return redirect ('/')
 
 def register(request):
@@ -130,7 +130,7 @@ def add_to_cart(request, id):
 
 def cart(request):
     if 'current_user' in request.session:
-        user = User.objects.get(id=id)
+        user = User.objects.get(id=request.session['current_user'])
     else:
         user = 'guest'
     product_name = []
@@ -174,7 +174,7 @@ def place_order(request):
     Order.objects.create(order_first_name=request.POST['first_name'], order_last_name=request.POST['last_name'], address_line1=request.POST['address_line1'], address_line2=request.POST['address_line2'], city=request.POST['city'], state=request.POST['state'], zipcode=request.POST['zipcode'], billing_address_line1=request.POST['billing_address_line1'], billing_address_line2=request.POST['billing_address_line2'], billing_city=request.POST['billing_city'], billing_state=request.POST['billing_state'], billing_zipcode=request.POST['billing_zipcode'], card=request.POST['card'], security_code=request.POST['security_code'], expiration=request.POST['expiration'] )
     print ("*"*100)
     print ('we posted an order!')
-    order = Order.objects.get(card=request.POST['card'])
+    order = Order.objects.filter(card=request.POST['card']).order_by('-created_at')[0:1]
     # this may only grab the latest order 
     print order
 
