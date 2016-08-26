@@ -29,10 +29,12 @@
        </div>
     </header>
 <main>
+
+    
      <div class="container white">
-      	<div class="white">
-      		<table>
-      			<thead>
+        <div class="white">
+          <table>
+            <thead>
             
               
               <td>Item</td>
@@ -41,7 +43,7 @@
               <td>Total</td>
             </th>
             </thead>
-      				<tbody>
+              <tbody>
               {% for entry in all_data %}
                 <tr>
                   <td>{{entry.name}}</td>
@@ -53,16 +55,14 @@
                 
               
               </tbody>
-      		</table>
-      		<div class="white">
-	      		Total:${{display_total}}<br>
-	      		<a class="btn waves-effect waves-light deep-orange darken-4" href="/">Continue Shopping</a>
-            <a class="btn waves-effect waves-light deep-orange darken-4" href="#">Place Order</a>
-      		</div>
-      	</div>
-	    </div>
-	<div class="container white">
-		<h4>Shipping Information</h4>
+          </table>
+          <div class="white">
+            Total:${{display_total}}<br>
+          </div>
+        </div>
+      </div>
+  <div class="container white">
+    <h4>Shipping Information</h4>
     <script type="text/javascript">
     function FillBilling(f) {
       if(f.billingtoo.checked == true) {
@@ -76,28 +76,35 @@
       }
     };
     </script>
-		<form action="/order" method="POST">
-			First Name: <input type="text" name="first_name">
-			Last Name: <input type="text" name="last_name">
-      Email: <input type="text" name="email">
-			Address: <input type="text" name="address_line1">
-			Address 2: <input type="text" name="address_line2">
-			City: <input type="text" name="city">
-			State: <input type="text" name="state">
-			Zipcode: <input type="text" name="zipcode">
+    <form action="/place_order" method="POST">
+      First Name: <input type="text" name="first_name">
+      Last Name: <input type="text" name="last_name">
+      Address: <input type="text" name="address_line1">
+      Address 2: <input type="text" name="address_line2">
+      City: <input type="text" name="city">
+      State: <input type="text" name="state">
+      Zipcode: <input type="text" name="zipcode">
 
-		<h4>Billing Information</h4>
-		  <p>
+      <h4>Billing Information</h4>
+      <p>
       <input class='browser-default' type="checkbox" name="billingtoo" onclick="FillBilling(this.form)" id="test5" />
       <label for="test5">Same as Shipping</label>
       </p>
-			First Name: <input type="text" name="billing_first_name">
-			Last Name: <input type="text" name="billing_last_name">
-			Address: <input type="text" name="billing_address_line1">
-			Address 2: <input type="text" name="billing_address_line2">
-			City: <input type="text" name="billing_city">
-			State: <input type="text" name="billing_state">
-			Zipcode: <input type="text" name="billing_zipcode">
+      First Name: <input type="text" name="billing_first_name">
+      Last Name: <input type="text" name="billing_last_name">
+      Address: <input type="text" name="billing_address_line1">
+      Address 2: <input type="text" name="billing_address_line2">
+      City: <input type="text" name="billing_city">
+      State: <input type="text" name="billing_state">
+      Zipcode: <input type="text" name="billing_zipcode">
+      Card: <input type="text" name="card">
+      Security Code: <input type="text" name="security_code">
+      Expiration: <input type="date" name="expiration">
+      <input type="submit" name="submit">
+      <a class="btn waves-effect waves-light deep-orange darken-4" href="/">Continue Shopping</a>
+      <a class="btn waves-effect waves-light deep-orange darken-4" href="/place_order">Place Order</a>
+      {% csrf_token %}
+</form>
       <form action="/pay" method="POST">
        <script
          src="https://checkout.stripe.com/checkout.js" class="stripe-button"

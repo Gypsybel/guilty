@@ -112,33 +112,10 @@ class User(models.Model):
     last_name = models.CharField(max_length=30)
     email = models.CharField(max_length=40)
     password = models.CharField(max_length=200)
-    address_id = models.OneToOneField('Address', related_name = 'Address', null = True)
-    billing_id = models.OneToOneField('Billing', related_name = 'Billing', null = True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     objects = UserManager()
-
-class Address(models.Model):
-    address_line1 = models.CharField(max_length=100)
-    address_line2 = models.CharField(max_length=100)
-    city = models.CharField(max_length=50)
-    state = models.CharField(max_length=40)
-    zipcode = models.CharField(max_length=10)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-class Billing(models.Model):
-    billing_address_line1 = models.CharField(max_length=100)
-    billing_address_line2 = models.CharField(max_length=100)
-    billing_city = models.CharField(max_length=50)
-    billing_state = models.CharField(max_length=40)
-    billing_zipcode = models.CharField(max_length=10)
-    card = models.CharField(max_length=40)
-    security_code = models.CharField(max_length=5)
-    expiration = models.DateField(auto_now=False)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
 
 class Product(models.Model):
     name = models.CharField(max_length=30)
@@ -163,13 +140,32 @@ class Image(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
 class Order(models.Model):
+    order_first_name = models.CharField(max_length=40, null=True)
+    order_last_name = models.CharField(max_length=40, null=True)
     status = models.CharField(max_length=40)
-    user_id = models.ForeignKey(User)
-    product_id = models.ForeignKey(Product)
+    address_line1 = models.CharField(max_length=100, null=True)
+    address_line2 = models.CharField(max_length=100, null=True)
+    city = models.CharField(max_length=50, null=True)
+    state = models.CharField(max_length=40, null=True)
+    zipcode = models.CharField(max_length=10, null=True)
+    billing_address_line1 = models.CharField(max_length=100, null=True)
+    billing_address_line2 = models.CharField(max_length=100, null=True)
+    billing_city = models.CharField(max_length=50, null=True)
+    billing_state = models.CharField(max_length=40, null=True)
+    billing_zipcode = models.CharField(max_length=10, null=True)
+    card = models.CharField(max_length=40, null=True)
+    security_code = models.CharField(max_length=5, null=True)
+    expiration = models.DateField(auto_now=False, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-    # objects = OrderManager() does not exist yet
+class Ord_Prod(models.Model):
+    order_id = models.ForeignKey(Order)
+    product_id = models.ForeignKey(Product)
+    quantity = models.IntegerField(null = True)
+    price_total = models.IntegerField(null = True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
 class Comment(models.Model):
     comment = models.TextField(max_length=250)

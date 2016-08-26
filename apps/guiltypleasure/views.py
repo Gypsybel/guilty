@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import User, Product, Address, Billing, Category, Image, Order, Review, Comment
+from .models import User, Product, Category, Image, Order, Review, Comment, Ord_Prod
 from django.contrib import messages
 
 def index(request):
@@ -161,16 +161,40 @@ def cart(request):
 def update(request):
     pass
 
-def pay(request, id):
-	# Credit card api and
-	pass
+def place_order(request):
+    Order.objects.create(order_first_name=request.POST['first_name'], order_last_name=request.POST['last_name'], address_line1=request.POST['address_line1'], address_line2=request.POST['address_line2'], city=request.POST['city'], state=request.POST['state'], zipcode=request.POST['zipcode'], billing_address_line1=request.POST['billing_address_line1'], billing_address_line2=request.POST['billing_address_line2'], billing_city=request.POST['billing_city'], billing_state=request.POST['billing_state'], billing_zipcode=request.POST['billing_zipcode'], card=request.POST['card'], security_code=request.POST['security_code'], expiration=request.POST['expiration'] )
+    print ("*"*100)
+    print ('we posted an order!')
+    order = Order.objects.get(card=request.POST['card'])
+    # this may only grab the latest order 
+    print order
 
 
-# def page(request):
-# 	# Still to figure out!
-# 	pass
+# once order is created need specific Order ID
 
-		# ADMIN STUFF
+    product_id = []
+    product_name = []
+    product_price =[]
+    quantity_list = []
+    total = []
+    if 'product' in request.session:
+        for i in range(0, len(request.session['product'])):
+            prod = Product.objects.get(id = request.session['product'][int(i)])
+            product_id.append(prod.id)
+            product_name.append(prod.name)
+            product_price.append(prod.price)
+    if 'quantity' in request.session:
+        quantity_list = request.session['quantity']
+    for u in range(0, len(product_name)):
+        total_cost = (int(quantity_list[u]) * int(product_price[u]))
+        total.append(total_cost)
+
+    for x in range(0, len(product_id)):
+        product_object = Product.objects.get(id=product_id[x])
+        Ord_Prod.objects.create(order_id = order,product_id=product_object,quantity=quantity_list[x], price_total=total[x] )
+
+        # this will make objects in the Ord_Prod table and will need to link to get ID from Order table
+    return redirect('/')
 
 def admin_index(request):
     return render(request, 'guiltypleasure/adminlogin.html')
@@ -194,8 +218,10 @@ def admin_logout(request):
     return redirect('/admin_index')
 
 def order_list(request):
+    orders = Ord_Prod.objects.all().order_by('-created_at')
+    context = {'orders':orders}
 	# This should be able to pull in all the informaiton throught the User ID link
-    return render(request, 'guiltypleasure/adminorders.html')
+    return render(request, 'guiltypleasure/adminorders.html', context)
 
 
 def show_order(request, id):
