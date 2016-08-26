@@ -1,12 +1,16 @@
 body{
-  background-image:url("../images/beatles_background.jpg");
+  background-image:url("../images/vegas2.jpg");
   background-repeat:no-repeat;
   background-size: 1920px 1080px;
   background-attachment: fixed;
 }
 
-nav{
-   height:120px;
+#page{
+  display: inline-block;
+}
+.nav{
+   height:100px;
+   line-height: 100px;
 }
 #category-search{
   display: inline-block;
@@ -22,10 +26,6 @@ nav{
   font-style: italic;
 }
 
-#titles{
-
-}
-
 a{
   color: blue;
 }
@@ -35,7 +35,7 @@ a:hover{
 img{
    margin: auto;
 }
-  body {
+body {
 display: flex;
 min-height: 100vh;
 flex-direction: column;

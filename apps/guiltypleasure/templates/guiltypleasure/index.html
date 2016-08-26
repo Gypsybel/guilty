@@ -23,7 +23,6 @@
                       {% for i in categories %}
                       <li><a href="/category/{{i.id}}">{{i.category}}</a></li>
                       {% endfor %}
-
                   </ul>
                   <li><a class="btn dropdown-button deep-orange darken-4" href="#" data-activates="dropdown">Categories</a></li>
                   <li><a href="/log_reg"><i class="material-icons">account_circle</i></a></li>
@@ -42,32 +41,29 @@
                   <div class="product-title">
                     <p class="flow-text" id="quote">"Be Proud of What You Love"</p>
                     <p class="flow-text" id="title">{{titles}}</p>
-
                   </div>
                </div>
             </div>
-         {% for product in products %}
-            <div class="col s4">
-              <div class="products">
-              {% for image in images %}
-                {% if image.id == product %}
-                 <a href="/show_product/{{product.id}}"><img src="../../{{image.url}}" style='height: 80%; width: 80%; object-fit: contain'><br>{{product.name}}</a><br>
-                 {{product.price}}
-                {% endif %}
-                {% endfor %}
+      <div class="container">
+          <div class="row">
+              <div class="col s12">
+                  <div id="pages" class="col s12">
+                      {% for product in products %}
+                          {% for image in images %}
+                            {% if image.id == product %}
+                              <div class="page col s4" id="page">
+                                <div class="products">
+                                <a href="/show_product/{{product.id}}"><img src="../../{{image.url}}" style='height: 80%; width: 80%; object-fit: contain'><br>{{product.name}}</a><br>
+                                {{product.price}}
+                                </div>
+                              </div>
+                            {% endif %}
+                          {% endfor %}
+                      {% endfor %}
+                  </div>
+                  <ul class="pagination" id="myPager"></ul>
               </div>
-            </div>
-         {% endfor %}
-         </div>
-         <ul class="pagination">
-            <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
-            <li class="active deep-orange darken-4"><a href="#!">1</a></li>
-            <li class="waves-effect"><a href="#!">2</a></li>
-            <li class="waves-effect"><a href="#!">3</a></li>
-            <li class="waves-effect"><a href="#!">4</a></li>
-            <li class="waves-effect"><a href="#!">5</a></li>
-            <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
-         </ul>
+          </div>
       </div>
    </main>
     <footer class="page-footer black">
@@ -80,5 +76,122 @@
          </div>
       </div>
    </footer>
+<script type="text/javascript">
+  /* pagination */
+$.fn.pageMe = function(opts){
+    var $this = this,
+        defaults = {
+            perPage: 7,
+            showPrevNext: false,
+            numbersPerPage: 1,
+            hidePageNumbers: false
+        },
+        settings = $.extend(defaults, opts);
+    
+    var listElement = $this;
+    var perPage = settings.perPage; 
+    var children = listElement.children();
+    var pager = $('.pagination');
+    
+    if (typeof settings.childSelector!="undefined") {
+        children = listElement.find(settings.childSelector);
+    }
+    
+    if (typeof settings.pagerSelector!="undefined") {
+        pager = $(settings.pagerSelector);
+    }
+    
+    var numItems = children.size();
+    var numPages = Math.ceil(numItems/perPage);
+
+    pager.data("curr",0);
+    
+    if (settings.showPrevNext){
+        $('<li><a href="#" class="prev_link">&lsaquo;</a></li>').appendTo(pager);
+    }
+    
+    var curr = 0;
+    while(numPages > curr && (settings.hidePageNumbers==false)){
+        $('<li><a href="#" class="page_link">'+(curr+1)+'</a></li>').appendTo(pager);
+        curr++;
+    }
+  
+    if (settings.numbersPerPage>1) {
+       $('.page_link').hide();
+       $('.page_link').slice(pager.data("curr"), settings.numbersPerPage).show();
+    }
+    
+    if (settings.showPrevNext){
+        $('<li><a href="#" class="next_link">&rsaquo;</a></li>').appendTo(pager);
+    }
+    
+
+    pager.find('.page_link:first').addClass('active');
+    if (numPages<=1) {
+        pager.find('.next_link').hide();
+    }
+    pager.children().eq(1).addClass("active");
+    
+    children.hide();
+    children.slice(0, perPage).show();
+    
+    pager.find('li .page_link').click(function(){
+        var clickedPage = $(this).html().valueOf()-1;
+        goTo(clickedPage,perPage);
+        return false;
+    });
+    pager.find('li .prev_link').click(function(){
+        previous();
+        return false;
+    });
+    pager.find('li .next_link').click(function(){
+        next();
+        return false;
+    });
+    
+    function previous(){
+        var goToPage = parseInt(pager.data("curr")) - 1;
+        goTo(goToPage);
+    }
+     
+    function next(){
+        goToPage = parseInt(pager.data("curr")) + 1;
+        goTo(goToPage);
+    }
+    
+    function goTo(page){
+        var startAt = page * perPage,
+            endOn = startAt + perPage;
+        
+        children.css('display','none').slice(startAt, endOn).show();
+        
+        if (page>=1) {
+            pager.find('.prev_link').show();
+        }
+        else {
+            pager.find('.prev_link').hide();
+        }
+        
+        if (page<(numPages-1)) {
+            pager.find('.next_link').show();
+        }
+        else {
+            pager.find('.next_link').hide();
+        }
+        
+        pager.data("curr",page);
+       
+        if (settings.numbersPerPage>1) {
+          $('.page_link').hide();
+          $('.page_link').slice(page, settings.numbersPerPage+page).show();
+      }
+      
+        pager.children().removeClass("active");
+        pager.children().eq(page+1).addClass("active");  
+    }
+};
+
+$('#pages').pageMe({pagerSelector:'#myPager',childSelector:'.page',showPrevNext:true,hidePageNumbers:false,perPage:6});
+</script>
 </body>
 </html>
