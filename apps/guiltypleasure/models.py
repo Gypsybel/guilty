@@ -77,7 +77,7 @@ class ProductManager(models.Manager):
         else:
             category = Category.objects.get(id = select_category)
 
-        Product.objects.create(name= name,description = description,price = 0, category_id = Category.objects.get(id=category.id),inventory = 100, sold = 0,)
+        Product.objects.create(name= name,description = description,price = price, category_id = Category.objects.get(id=category.id),inventory = 100, sold = 0,)
         product = Product.objects.get(name= name, description = description,price = price, category_id = Category.objects.get(id=category.id))
         Image.objects.create(image=file, product_id=product)
         return(True)
