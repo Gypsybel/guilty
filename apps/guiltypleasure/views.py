@@ -179,7 +179,7 @@ def place_order(request):
     # this may only grab the latest order 
     print order
     messages.success(request, "Thank you for your purchase!")
-    return redirect('/')
+    
 
 
 # once order is created need specific Order ID
@@ -206,6 +206,8 @@ def place_order(request):
         Ord_Prod.objects.create(order_id = order[0],product_id=product_object,quantity=quantity_list[x], price_total=total[x] )
 
         # this will make objects in the Ord_Prod table and will need to link to get ID from Order table
+    del request.session['product']
+    del request.session['quantity']
     return redirect('/')
 
 def admin_index(request):
