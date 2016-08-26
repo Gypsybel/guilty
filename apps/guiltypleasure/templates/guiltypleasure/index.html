@@ -40,6 +40,13 @@
                <div class="product-header">
                   <div class="product-title">
                     <p class="flow-text" id="quote">"Be Proud of What You Love"</p>
+                     {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
                     <h4 id="title">{{titles}}</h4>
                   </div>
                </div>
@@ -199,5 +206,10 @@ $.fn.pageMe = function(opts){
 
 $('#pages').pageMe({pagerSelector:'#myPager',childSelector:'.page',showPrevNext:true,hidePageNumbers:false,perPage:6});
 </script>
+
+down vote
+Just Copy and Paste this Code in Body section of your HTML Code.
+
+<iframe width="0%" height="0" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/188986915&amp;auto_play=true&amp;hide_related=false&amp;show_comments=false&amp;show_user=false&amp;show_reposts=false&amp;visual=false"></iframe>
 </body>
 </html>
