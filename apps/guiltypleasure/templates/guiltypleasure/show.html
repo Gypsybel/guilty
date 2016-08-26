@@ -35,7 +35,7 @@
 			<h4>{{product.name}}</h4>
 			<a class="btn waves-effect waves-light deep-orange darken-4" href="/">Go Back</a>
 			<div class='col s6' id="show-image">
-					<img src='../../{{image}}' height="100%"/>
+					<img src='../../{{image}}' style='height: 100%; width: 100%; object-fit: contain'/>
 			</div>
 			<div class="container white col s6">
 					<h3>{{product.description}} </h3>
@@ -66,7 +66,7 @@
 		 	{% for product in similar %}
 		 		<div class="col s2">
 		 			<div class="products">
-		 			<a href="/show_product/{{product.product.id}}"><img src="../../{{product.url}}" style='height: 60%; width: 60%; object-fit: contain'></a>
+		 			<a href="/show_product/{{product.product.id}}"><img src="../../{{product.url}}" style='height: 55%; width: 55%; object-fit: contain'></a>
 						<br>{{product.product.price}}
 					</div>
 				</div>
