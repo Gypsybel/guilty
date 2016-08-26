@@ -11,7 +11,6 @@
     }
     .container{
       border: 1px solid black;
-      height: 4000px;
       background-color: #4DB6AC ;
       margin: auto;
     }
@@ -86,7 +85,7 @@
               <td>{{order.product_id.name}}</td>
               <td>{{order.order_id.created_at}}</td>
               <td>{{order.order_id.billing_address_line1}}</td>
-              <td>{{order.price_total}}</td>
+              <td>${{order.price_total}}</td>
               <td><select class="browser-default">
                     <option>Order in Process</option>
                     <option>Shipped</option>

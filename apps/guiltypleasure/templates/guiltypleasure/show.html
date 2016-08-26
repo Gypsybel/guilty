@@ -49,9 +49,9 @@
 					{% csrf_token %}
 						<select name="quantity" id="quantity" class="browser-default">
 							<option value="" disabled selected>Quantity</option>
-							<option value="1">1 {{product.price|mul:1}}</option>
-							<option value="2">2 {{product.price|mul:2}}</option>
-							<option value="3">3 {{product.price|mul:3}}</option>
+							<option value="1">1 ${{product.price|mul:1}}</option>
+							<option value="2">2 ${{product.price|mul:2}}</option>
+							<option value="3">3 ${{product.price|mul:3}}</option>
 						</select>
 					<input type="submit" name="Add to Cart" value='Add To Cart' class="btn waves-effect waves-light deep-orange darken-4" onclick="Materialize.toast('Item Added to Cart',2000)">
 					</form>
