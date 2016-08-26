@@ -134,7 +134,6 @@ class Billing(models.Model):
     billing_city = models.CharField(max_length=50)
     billing_state = models.CharField(max_length=40)
     billing_zipcode = models.CharField(max_length=10)
-    user_id = models.OneToOneField(User)
     card = models.CharField(max_length=40)
     security_code = models.CharField(max_length=5)
     expiration = models.DateField(auto_now=False)

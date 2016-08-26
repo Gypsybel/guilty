@@ -41,9 +41,7 @@
                <div class="product-header">
                   <div class="product-title">
                     <p class="flow-text" id="quote">"Be Proud of What You Love"</p>
-                    {% if categories%}
-                      {{categories.name}}
-                    {% endif %}
+                    <p class="flow-text" id="title">{{titles}}</p>
 
                   </div>
                </div>
@@ -53,7 +51,7 @@
               <div class="products">
               {% for image in images %}
                 {% if image.id == product %}
-                 <a href="/show_product/{{product.id}}"><img src="../../{{image.url}}" height="90%"><br>{{product.name}}</a><br>
+                 <a href="/show_product/{{product.id}}"><img src="../../{{image.url}}" style='height: 80%; width: 80%; object-fit: contain'><br>{{product.name}}</a><br>
                  {{product.price}}
                 {% endif %}
                 {% endfor %}

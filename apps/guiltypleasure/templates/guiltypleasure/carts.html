@@ -32,23 +32,30 @@
      <div class="container white">
       	<div class="white">
       		<table>
-      			<th>
-      				<td>Item</td>
-      				<td>Price</td>
-      				<td>Quantity</td>
-      				<td>Total</td>
-      			</th>
-      			<!-- {% for product in cart %}
-      				<tr>
-      					<td>{{product.name}}</td>
-      					<td>{{product.price}}</td>
-      					<td>{{product.quantity}} <a href="/update/{{product.id}}">update</a> <a href="/delete/{{product.id}}">trash icon here</a></td>
-      					<td>${{product.price.count}}</td>
-      				</tr>
-      			{% endfor %} -->
+      			<thead>
+            
+              
+              <td>Item</td>
+              <td>Price</td>
+              <td>Quantity</td>
+              <td>Total</td>
+            </th>
+            </thead>
+      				<tbody>
+              {% for entry in all_data %}
+                <tr>
+                  <td>{{entry.name}}</td>
+                  <td>{{entry.price}}</td>
+                  <td>{{entry.quantity}}</td>
+                  <td>${{entry.cost}}</td>
+                </tr>
+              {% endfor %}
+                
+              
+              </tbody>
       		</table>
       		<div class="white">
-	      		Total:{{product.price.count}}<br>
+	      		Total:${{display_total}}<br>
 	      		<a class="btn waves-effect waves-light deep-orange darken-4" href="/">Continue Shopping</a>
             <a class="btn waves-effect waves-light deep-orange darken-4" href="#">Place Order</a>
       		</div>
