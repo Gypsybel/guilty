@@ -38,7 +38,12 @@
 					<img src='../../{{image}}' height="100%"/>
 			</div>
 			<div class="container white col s6">
-					<p>{{product.description}}</p>
+					<p>{{product.description}} Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+					consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+					cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+					proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 					<form action="/add_to_cart/{{product.id}}" id="post-form" class="right" method="POST">
 					{% csrf_token %}
 						<select name="quantity" id="quantity" class="browser-default">
@@ -54,15 +59,21 @@
 
 
 		</div>
-	</div>
-	<!-- <div class="container white">
+	
 		<h5>Similar Items</h5>
-		 {% for product in similarproducts %}
-			<img src="{{product.source}}">
-      {{product.price}}
-      {{product.name}}
-		{% endfor %}
-	</div> -->
+		<div class="row">
+		 	{% for product in similar %}
+		 		<div class="col s2">
+		 			<div class="products">
+		 			<a href="/show_product/{{product.product.id}}"><img src="../../{{product.url}}" style='height: 60%; width: 60%; object-fit: contain'></a>
+						<br>{{product.product.price}}
+					</div>
+				</div>
+      <!-- {{product.price}}
+      {{product.name}} -->
+			{% endfor %}
+		</div>
+	</div>
 </main>
 
 <footer class="page-footer black">
