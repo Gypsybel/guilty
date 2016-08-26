@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import User, Product, Category, Image, Order, Review, Comment, Ord_Prod
 from django.contrib import messages
+from django.db.models import Q
 
 def index(request):
     if not 'current_user' in request.session:
@@ -70,10 +71,18 @@ def category(request, id):
 
 def show_product(request, id):
     product = Product.objects.get(id=id)
+    similar = Product.objects.filter(category_id=product.category_id).exclude(id=id)[:6]
+    print ('*'*100)
+    print similar
+    similar_url = []
+    for i in similar:
+        temp = Image.objects.get(product_id=i)
+        tempimage = str(temp.image)[20:]
+        similar_url.append({'url':tempimage, 'product':i})
     image = Image.objects.get(product_id=product)
     image_str = str(image.image)
     sliced = image_str[20:]
-    context = {"product":product, 'image':sliced}
+    context = {"product":product, 'image':sliced, 'similar':similar_url}
     return render(request, 'guiltypleasure/show.html', context)
 
 def review(request, id):
