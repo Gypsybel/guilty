@@ -119,17 +119,42 @@ def add_to_cart(request, id):
 # Buy button should update the quantity field in the Cart view
 
 def cart(request):
-    if 'current_user' in session:
-        return (False)
-    product_list = []
+    if 'current_user' in request.session:
+        user = User.objects.get(id=id)
+    else:
+        user = 'guest'
+    product_name = []
+    product_price =[]
     quantity_list = []
-    if 'product' in session:
-        for i in request.session['product']:
+    total = []
+    if 'product' in request.session:
+        for i in range(0, len(request.session['product'])):
+            prod = Product.objects.get(id = request.session['product'][int(i)])
+            product_name.append(prod.name)
+            product_price.append(prod.price)
+    if 'quantity' in request.session:
+        quantity_list = request.session['quantity']
+    for u in range(0, len(product_name)):
+        total_cost = (int(quantity_list[u]) * int(product_price[u]))
+        total.append(total_cost)
+    
 
-    if 'quantity' in session:
-        for i in request.session['quantity']:
+    all_data = []
+    for x in range(0,len(product_name)):
+        name = product_name[x]
+        price = product_price[x]
+        quantity = quantity_list[x]
+        cost = total[x]
+        all_data.append({'name': name, 'price': price, 'quantity': quantity, 'cost':cost})
+    real_total = 0
+    for a in range(0, len(total)):
+        real_total += total[a]
+    
+    context = {'all_data': all_data,
+                'display_total':real_total,
+                'user': user}
 
-    return render(request, 'guiltypleasure/carts.html')
+    return render(request, 'guiltypleasure/carts.html', context)
 
 def update(request):
     pass
